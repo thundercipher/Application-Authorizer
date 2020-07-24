@@ -1,8 +1,7 @@
 # Application Authorizer
-An app to file (by students) and review/approve (by Warden, Control Room, etc.) leave applications at college level, in an attempt to digitalise the leave application/reviewal/approval
+An app to file (by students) and review/approve (by Warden, Control Room, etc.) leave applications at college level, in an attempt to digitalise the application/reviewal/approval
 process which can be applied in all the education systems; i.e. schools, coaching institutes and colleges, present in India and across the world, which would save a lot of formal
-paperwork and hence, a lot of time. This app also acts as a countermeasure tackling the aftermath of COVID-19, eliminating the exposure and proximity of people from one another; and thus reducing the
-chances of spreading infections.
+paperwork and hence, a lot of time. This app also acts as a countermeasure tackling the aftermath of COVID-19, eliminating the exposure and proximity of people from one another; and thus reducing the chances of spreading infections.
 
 This app deals with the following aspects:
 
