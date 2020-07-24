@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "909386509692",
+    "firebase_url": "https://application-authorizer.firebaseio.com",
+    "project_id": "application-authorizer",
+    "storage_bucket": "application-authorizer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909386509692:android:d5808bbde0d26cc47048f9",
+        "android_client_info": {
+          "package_name": "com.tanay.thundercipher.leaveapplications"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909386509692-1efah4j2hra5joapb1rk75hse79d8at4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tanay.thundercipher.leaveapplications",
+            "certificate_hash": "86e80d71d9f53f3e5a54844c2046a279c7c1e643"
+          }
+        },
+        {
+          "client_id": "909386509692-qplovnm88hhnens22dd8v24guk4t9oe6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkjxFMb2WLrwRqv-1qLYgxvDsqx1VIt8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909386509692-qplovnm88hhnens22dd8v24guk4t9oe6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

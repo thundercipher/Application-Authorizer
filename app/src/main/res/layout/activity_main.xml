@@ -30,6 +30,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/Capture" />
+        app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/containedButton"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="65dp"
+        android:background="#4FA8B3"
+        android:text="Log In"
+        android:textSize="19sp"
+        android:drawableStart="@drawable/ic_baseline_radio_button_checked_24"
+        android:paddingLeft="30dp"
+        android:paddingRight="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TitleTextView" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="55dp"
+        android:background="#4FA8B3"
+        android:text="Sign Up"
+        android:textSize="19sp"
+        android:drawableStart="@drawable/ic_baseline_create_24black"
+        android:paddingLeft="30dp"
+        android:paddingRight="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containedButton" />
+
+    <TextView
+        android:id="@+id/signUpTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:text="Don't have an account? Sign Up"
+        android:textColor="#F3FEFF"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
