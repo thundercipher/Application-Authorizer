@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView websiteImageView;
+    ImageView websiteImageView, linkedinImageView;
 
     private void clickedButton(String url)
     {
@@ -43,5 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 clickedButton("https://www.iiitm.ac.in/index.php/en/");
             }
         });
+
+        linkedinImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                clickedButton("//https://www.linkedin.com/school/abv-indian-institute-of-information-technology-and-management/");
+            }
+        });
     }
 }
+
