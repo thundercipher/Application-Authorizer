@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView websiteImageView, linkedinImageView;
+    Button logInButton, signUpButton;
 
     private void clickedButton(String url)
     {
@@ -35,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setTitle("Application Authorizer");
+        websiteImageView = (ImageView)findViewById(R.id.websiteImageView);
+        linkedinImageView = (ImageView)findViewById(R.id.linkedinImageView);
+        logInButton = (Button)findViewById(R.id.logInButton);
+        signUpButton = (Button)findViewById(R.id.signUpButton);
 
         websiteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +56,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 clickedButton("//https://www.linkedin.com/school/abv-indian-institute-of-information-technology-and-management/");
+            }
+        });
+
+        logInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(getApplicationContext(), LogInActivity.class);
+                startActivity(i);
+            }
+        });
+
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(i);
             }
         });
     }

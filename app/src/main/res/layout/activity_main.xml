@@ -31,7 +31,7 @@
         app:srcCompat="@drawable/logo" />
 
     <Button
-        android:id="@+id/containedButton"
+        android:id="@+id/logInButton"
         android:layout_width="180dp"
         android:layout_height="45dp"
         android:layout_marginTop="65dp"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/TitleTextView" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/signUpButton"
         android:layout_width="180dp"
         android:layout_height="45dp"
         android:layout_marginTop="55dp"
@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containedButton" />
+        app:layout_constraintTop_toBottomOf="@+id/logInButton" />
 
     <TextView
         android:id="@+id/signUpTextView"
@@ -69,7 +69,7 @@
         android:layout_marginBottom="9dp"
         android:text="Don't have an account? Sign Up"
         android:textColor="#F3FEFF"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/signUpButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
