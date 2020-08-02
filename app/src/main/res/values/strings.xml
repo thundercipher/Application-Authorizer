@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Application Authorizer</string>
+
+    <string-array name="users">
+        <item>Warden</item>
+        <item>Student</item>
+        <item>Security Official</item>
+    </string-array>
+
 </resources>
