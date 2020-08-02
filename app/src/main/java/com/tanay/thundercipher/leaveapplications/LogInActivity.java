@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LogInActivity extends AppCompatActivity {
 
     Spinner usersListSpinner;
+    String loginMethod;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,5 +27,7 @@ public class LogInActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         usersListSpinner.setAdapter(adapter);
+
+        loginMethod = usersListSpinner.getSelectedItem().toString();
     }
 }
