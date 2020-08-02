@@ -3,31 +3,34 @@ package com.tanay.thundercipher.leaveapplications;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LogInActivity extends AppCompatActivity {
 
-    Spinner usersListSpinner;
-    String loginMethod;
     FirebaseAuth auth;
+    Button logInButton;
+    ImageView googleLogInImageView;
+    EditText logInEmailEditText, logInPasswordEditText;
+    String logInEmail, logInPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        usersListSpinner = (Spinner)findViewById(R.id.usersListSpinner);
+       logInButton = (Button)findViewById(R.id.logInButton);
+       googleLogInImageView = (ImageView)findViewById(R.id.googleLogInImageView);
+       logInEmailEditText = (EditText)findViewById(R.id.logInEmailEditText);
+       logInPasswordEditText = (EditText)findViewById(R.id.logInPasswordEditText);
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.users, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        usersListSpinner.setAdapter(adapter);
-
-        loginMethod = usersListSpinner.getSelectedItem().toString();
+       logInEmail = logInEmailEditText.getText().toString();
+       logInPassword = logInPasswordEditText.getText().toString();
     }
 }
