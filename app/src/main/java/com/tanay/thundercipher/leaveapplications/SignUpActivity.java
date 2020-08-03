@@ -28,7 +28,7 @@ public class SignUpActivity extends AppCompatActivity {
     ImageView googleSignUpImageView;
     FirebaseAuth auth;
 
-    public void registerUser(String email, String password, final String userType)
+    public void signUpUser(String email, String password, final String userType)
     {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -75,6 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpPasswordEditText = (EditText)findViewById(R.id.signUpPasswordEditText);
         signUpButton = (Button)findViewById(R.id.signUpButton);
         googleSignUpImageView = (ImageView)findViewById(R.id.googleSignUpImageView);
+        auth = FirebaseAuth.getInstance();
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.users, android.R.layout.simple_spinner_item);
@@ -103,7 +104,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 else
                 {
-                    registerUser(signUpEmail, signUpPassword, signUpMethod);
+                    signUpUser(signUpEmail, signUpPassword, signUpMethod);
                 }
             }
         });
