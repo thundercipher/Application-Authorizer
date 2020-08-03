@@ -45,7 +45,11 @@ public class SignUpActivity extends AppCompatActivity {
             {
                 if(task.isSuccessful())
                 {
-                    userID = auth.getCurrentUser().getEmail();
+                    if(auth.getCurrentUser() != null)
+                    {
+                        userID = auth.getCurrentUser().getEmail();
+                    }
+
                     Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_SHORT).show();
                     DocumentReference reference = firestore.collection("Users").document(userID);
                     HashMap<String,Object> user = new HashMap<>();
