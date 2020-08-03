@@ -77,7 +77,5 @@ public class LogInActivity extends AppCompatActivity {
                logInUser(logInEmail, logInPassword);
            }
        });
-
-
     }
 }
