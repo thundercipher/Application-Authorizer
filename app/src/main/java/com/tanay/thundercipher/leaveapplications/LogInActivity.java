@@ -32,7 +32,7 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult)
             {
-                Toast.makeText(LogInActivity.this, "LogIn Successful!", Toast.LENGTH_SHORT);
+                Toast.makeText(LogInActivity.this, "LogIn Successful!", Toast.LENGTH_SHORT).show();
                 FirebaseUser user = auth.getCurrentUser();
                 String userType = "";
 

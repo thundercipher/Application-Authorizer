@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,20 +17,27 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
     Spinner usersListSpinner;
-    String signUpMethod,signUpEmail,signUpPassword;
+    String signUpMethod,signUpEmail,signUpPassword, userID;
     EditText signUpEmailEditText, signUpPasswordEditText;
     Button signUpButton;
     ImageView googleSignUpImageView;
     FirebaseAuth auth;
+    FirebaseFirestore firestore;
 
-    public void signUpUser(String email, String password, final String userType)
+    public void signUpUser(final String email, String password, final String userType)
     {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -36,24 +45,35 @@ public class SignUpActivity extends AppCompatActivity {
             {
                 if(task.isSuccessful())
                 {
+                    userID = auth.getCurrentUser().getEmail();
                     Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_SHORT).show();
+                    DocumentReference reference = firestore.collection("Users").document(userID);
+                    HashMap<String,Object> user = new HashMap<>();
+                    user.put("User Type", userType);
+                    user.put("Email ID", email);
 
-                    if(userType.equals("Student"))
-                    {
-                        startActivity(new Intent(SignUpActivity.this, StudentUserActivity.class));
-                        finish();
-                    }
+                    reference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid)
+                        {
+                            Log.i("Sign Up","Successful for" + userID);
+                        }
+                    });
 
-                    else if(userType.equals("Warden"))
+                    switch (userType)
                     {
-                        startActivity(new Intent(SignUpActivity.this, WardenUserActivity.class));
-                        finish();
-                    }
-
-                    else if(userType.equals("Security Official"))
-                    {
-                        startActivity(new Intent(SignUpActivity.this, SecurityUserActivity.class));
-                        finish();
+                        case "Student":
+                            startActivity(new Intent(SignUpActivity.this, StudentUserActivity.class));
+                            finish();
+                            break;
+                        case "Warden":
+                            startActivity(new Intent(SignUpActivity.this, WardenUserActivity.class));
+                            finish();
+                            break;
+                        case "Security Official":
+                            startActivity(new Intent(SignUpActivity.this, SecurityUserActivity.class));
+                            finish();
+                            break;
                     }
                 }
 
@@ -76,6 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpButton = (Button)findViewById(R.id.signUpButton);
         googleSignUpImageView = (ImageView)findViewById(R.id.googleSignUpImageView);
         auth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.users, android.R.layout.simple_spinner_item);
@@ -99,7 +120,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 else if(signUpPassword.length() < 8)
                 {
-                    Toast.makeText(SignUpActivity.this, "Password is too short!", Toast.LENGTH_SHORT);
+                    Toast.makeText(SignUpActivity.this, "Password should be of at least 8 characters!", Toast.LENGTH_SHORT);
                 }
 
                 else
