@@ -36,6 +36,8 @@ public class LogInActivity extends AppCompatActivity {
                 FirebaseUser user = auth.getCurrentUser();
                 String userType = "";
 
+                //have to get the userType here
+
                 if(userType.equals("Student"))
                 {
                     startActivity(new Intent(LogInActivity.this, StudentUserActivity.class));
