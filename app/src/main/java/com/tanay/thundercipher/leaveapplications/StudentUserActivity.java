@@ -3,15 +3,20 @@ package com.tanay.thundercipher.leaveapplications;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.android.material.navigation.NavigationView;
+
 public class StudentUserActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,6 +56,9 @@ public class StudentUserActivity extends AppCompatActivity {
 
         toolbar = (Toolbar)findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+
+        drawerLayout = (DrawerLayout)findViewById(R.id.studentDrawerLayout);
+        navigationView = (NavigationView)findViewById(R.id.studentNavigationView);
 
         /*
 
