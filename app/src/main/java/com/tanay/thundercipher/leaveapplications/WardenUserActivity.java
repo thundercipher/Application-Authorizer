@@ -3,15 +3,20 @@ package com.tanay.thundercipher.leaveapplications;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.android.material.navigation.NavigationView;
+
 public class WardenUserActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+    NavigationView navigationView;
+    DrawerLayout drawerLayout;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,6 +56,45 @@ public class WardenUserActivity extends AppCompatActivity {
 
         toolbar = (Toolbar)findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+
+        drawerLayout = (DrawerLayout)findViewById(R.id.wardenDrawerLayout);
+        navigationView = (NavigationView)findViewById(R.id.wardenNavigationView);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId())
+                {
+                    case R.id.navigationProfile:
+                    {
+                        item.setChecked(true);
+                        //add code
+                        drawerLayout.closeDrawers();
+                        return true;
+                    }
+
+
+                    case R.id.navigationProfilePic:
+                    {
+                        item.setChecked(true);
+                        //add code
+                        drawerLayout.closeDrawers();
+                        return true;
+                    }
+
+                    case R.id.navigationContactInfo:
+                    {
+                        item.setChecked(true);
+                        //add code
+                        drawerLayout.closeDrawers();
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        });
 
          /*
 
