@@ -60,6 +60,42 @@ public class StudentUserActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout)findViewById(R.id.studentDrawerLayout);
         navigationView = (NavigationView)findViewById(R.id.studentNavigationView);
 
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId())
+                {
+                    case R.id.navigationProfile:
+                    {
+                        item.setChecked(true);
+                        //add code
+                        drawerLayout.closeDrawers();
+                        return true;
+                    }
+
+
+                    case R.id.navigationProfilePic:
+                    {
+                        item.setChecked(true);
+                        //add code
+                        drawerLayout.closeDrawers();
+                        return true;
+                    }
+
+                    case R.id.navigationContactInfo:
+                    {
+                        item.setChecked(true);
+                        //add code
+                        drawerLayout.closeDrawers();
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        });
+
         /*
 
          logOutButton.setOnClickListener(new View.OnClickListener() {
