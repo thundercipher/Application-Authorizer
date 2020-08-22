@@ -1,8 +1,10 @@
 package com.tanay.thundercipher.leaveapplications;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
@@ -32,6 +34,12 @@ public class SecurityUserActivity extends AppCompatActivity {
 
         switch (item.getItemId())
         {
+            case android.R.id.home :
+            {
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            }
+
             case R.id.menuActionLogout :
             {
                 /*
@@ -56,6 +64,14 @@ public class SecurityUserActivity extends AppCompatActivity {
 
         toolbar = (Toolbar)findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        }
 
         drawerLayout = (DrawerLayout)findViewById(R.id.securityDrawerLayout);
         navigationView = (NavigationView)findViewById(R.id.securityNavigationView);
