@@ -21,7 +21,8 @@ public class StudentUserActivity extends AppCompatActivity {
     NavigationView navigationView;
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar_menu, menu);

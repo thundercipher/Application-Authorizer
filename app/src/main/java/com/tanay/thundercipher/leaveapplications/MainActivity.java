@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     ImageView websiteImageView, linkedinImageView;
@@ -31,6 +34,21 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Couldn't open the link!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    /*
+    protected void onStart()
+    {
+        super.onStart();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user != null)
+        {
+            startActivity(new Intent(MainActivity.this, UserActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        }
+    }
+
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

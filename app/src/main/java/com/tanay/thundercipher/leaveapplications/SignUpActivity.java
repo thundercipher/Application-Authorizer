@@ -51,16 +51,18 @@ public class SignUpActivity extends AppCompatActivity {
                     }
 
                     Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_SHORT).show();
-                    DocumentReference reference = firestore.collection("Users").document(userID);
                     HashMap<String,Object> user = new HashMap<>();
                     user.put("User Type", userType);
                     user.put("Email ID", email);
 
-                    reference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    firestore.collection("Users").document(userID).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
-                        public void onSuccess(Void aVoid)
+                        public void onComplete(@NonNull Task<Void> task)
                         {
-                            Log.i("Sign Up","Successful for" + userID);
+                            if(task.isSuccessful())
+                            {
+                                //add code
+                            }
                         }
                     });
 
