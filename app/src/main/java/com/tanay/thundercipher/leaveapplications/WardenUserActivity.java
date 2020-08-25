@@ -45,7 +45,7 @@ public class WardenUserActivity extends AppCompatActivity {
                 /*
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(UserActivity.this, "Successfully logged out!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(UserActivity.this, MainActivity.class));
+                startActivity(new Intent(WardenUserActivity.this, MainActivity.class));
                 */
                 return true;
             }
