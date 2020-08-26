@@ -43,7 +43,9 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult)
             {
+
                 Toast.makeText(LogInActivity.this, "LogIn Successful!", Toast.LENGTH_SHORT).show();
+
                 FirebaseUser user = auth.getCurrentUser();
                 String userID = "";
                 final String[] userType = {""};
@@ -51,11 +53,10 @@ public class LogInActivity extends AppCompatActivity {
 
                 if(user != null)
                 {
-                    userID = user.getEmail();
+                    userID = user.getUid();
                 }
 
                 //to get the userType
-
                 if (userID != "")
                 {
                     docRef = FirebaseFirestore.getInstance().collection("Users").document(userID);

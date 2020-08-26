@@ -85,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
                             startActivity(new Intent(SignUpActivity.this, WardenUserActivity.class));
                             finish();
                             break;
-                            
+
                         case "Security Official":
                             startActivity(new Intent(SignUpActivity.this, SecurityUserActivity.class));
                             finish();
