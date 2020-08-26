@@ -61,7 +61,7 @@ public class LogInActivity extends AppCompatActivity {
                 }
 
                 //to get the userType
-                if (userID != "")
+                if (!userID.equals(""))
                 {
                     DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(userID);
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
