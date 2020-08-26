@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -37,8 +39,12 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseFirestore firestore;
 
+    ProgressBar progressBar;
+
     public void signUpUser(final String email, String password, final String userType)
     {
+        progressBar.setVisibility(View.VISIBLE);
+
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task)
@@ -47,10 +53,9 @@ public class SignUpActivity extends AppCompatActivity {
                 {
                     if(auth.getCurrentUser() != null)
                     {
-                        userID = auth.getCurrentUser().getEmail();
+                        userID = auth.getCurrentUser().getUid();
                     }
 
-                    Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_SHORT).show();
                     HashMap<String,Object> user = new HashMap<>();
                     user.put("User Type", userType);
                     user.put("Email ID", email);
@@ -59,9 +64,12 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task)
                         {
+
+                            progressBar.setVisibility(View.GONE);
+
                             if(task.isSuccessful())
                             {
-                                //add code
+                                Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -72,10 +80,12 @@ public class SignUpActivity extends AppCompatActivity {
                             startActivity(new Intent(SignUpActivity.this, StudentUserActivity.class));
                             finish();
                             break;
+
                         case "Warden":
                             startActivity(new Intent(SignUpActivity.this, WardenUserActivity.class));
                             finish();
                             break;
+                            
                         case "Security Official":
                             startActivity(new Intent(SignUpActivity.this, SecurityUserActivity.class));
                             finish();
