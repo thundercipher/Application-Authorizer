@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,8 +37,12 @@ public class LogInActivity extends AppCompatActivity {
     String logInEmail, logInPassword;
     FirebaseFirestore firestore;
 
+    ProgressBar progressBar;
+
     public void logInUser(String email, String password)
     {
+        progressBar.setVisibility(View.VISIBLE);
+
         auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
 
             @Override
@@ -49,7 +54,6 @@ public class LogInActivity extends AppCompatActivity {
                 FirebaseUser user = auth.getCurrentUser();
                 String userID = "";
                 final String[] userType = {""};
-                DocumentReference docRef = null;
 
                 if(user != null)
                 {
@@ -59,7 +63,7 @@ public class LogInActivity extends AppCompatActivity {
                 //to get the userType
                 if (userID != "")
                 {
-                    docRef = FirebaseFirestore.getInstance().collection("Users").document(userID);
+                    DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(userID);
                     docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task)
@@ -67,7 +71,7 @@ public class LogInActivity extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 DocumentSnapshot doc = task.getResult();
-                                userType[0] = doc.getString("User Type");
+                                userType[0] = doc.get("User Type").toString();
                             }
                         }
                     });
@@ -75,18 +79,24 @@ public class LogInActivity extends AppCompatActivity {
 
                 if(userType[0].equals("Student"))
                 {
+                    progressBar.setVisibility(View.GONE);
+
                     startActivity(new Intent(LogInActivity.this, StudentUserActivity.class));
                     finish();
                 }
 
                 else if(userType[0].equals("Warden"))
                 {
+                    progressBar.setVisibility(View.GONE);
+
                     startActivity(new Intent(LogInActivity.this, WardenUserActivity.class));
                     finish();
                 }
 
                 else if(userType[0].equals("Security Official"))
                 {
+                    progressBar.setVisibility(View.GONE);
+
                     startActivity(new Intent(LogInActivity.this, SecurityUserActivity.class));
                     finish();
                 }

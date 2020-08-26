@@ -32,8 +32,8 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity {
 
     Spinner usersListSpinner;
-    String signUpMethod,signUpEmail,signUpPassword, userID;
-    EditText signUpEmailEditText, signUpPasswordEditText;
+    String signUpMethod,signUpEmail,signUpPassword, signUpName, userID;
+    EditText signUpEmailEditText, signUpPasswordEditText, signUpNameEditText;
     Button signUpButton;
     ImageView googleSignUpImageView;
     FirebaseAuth auth;
@@ -41,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
 
-    public void signUpUser(final String email, String password, final String userType)
+    public void signUpUser(final String name, final String email, String password, final String userType)
     {
         progressBar.setVisibility(View.VISIBLE);
 
@@ -58,6 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     HashMap<String,Object> user = new HashMap<>();
                     user.put("User Type", userType);
+                    user.put("Name", name);
                     user.put("Email ID", email);
 
                     firestore.collection("Users").document(userID).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -109,6 +110,7 @@ public class SignUpActivity extends AppCompatActivity {
         usersListSpinner = (Spinner)findViewById(R.id.usersListSpinner);
         signUpEmailEditText = (EditText)findViewById(R.id.signUpEmailEditText);
         signUpPasswordEditText = (EditText)findViewById(R.id.signUpPasswordEditText);
+        signUpNameEditText = (EditText)findViewById(R.id.signUpNameEditText);
         signUpButton = (Button)findViewById(R.id.signUpButton);
         googleSignUpImageView = (ImageView)findViewById(R.id.googleSignUpImageView);
         auth = FirebaseAuth.getInstance();
@@ -128,8 +130,9 @@ public class SignUpActivity extends AppCompatActivity {
                 signUpMethod = usersListSpinner.getSelectedItem().toString();
                 signUpEmail = signUpEmailEditText.getText().toString();
                 signUpPassword = signUpPasswordEditText.getText().toString();
+                signUpName = signUpNameEditText.getText().toString();
 
-                if(TextUtils.isEmpty(signUpEmail) || TextUtils.isEmpty(signUpPassword))
+                if(TextUtils.isEmpty(signUpName) || TextUtils.isEmpty(signUpEmail) || TextUtils.isEmpty(signUpPassword))
                 {
                     Toast.makeText(SignUpActivity.this, "Empty Credentials!", Toast.LENGTH_SHORT).show();
                 }
@@ -141,7 +144,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 else
                 {
-                    signUpUser(signUpEmail, signUpPassword, signUpMethod);
+                    signUpUser(signUpName, signUpEmail, signUpPassword, signUpMethod);
                 }
             }
         });
