@@ -7,18 +7,24 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SecurityUserActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    FirebaseAuth auth;
+    FirebaseDatabase database;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,11 +48,10 @@ public class SecurityUserActivity extends AppCompatActivity {
 
             case R.id.menuActionLogout :
             {
-                /*
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(UserActivity.this, "Successfully logged out!", Toast.LENGTH_SHORT).show();
+                auth.signOut();
+                Toast.makeText(getApplicationContext(), "Successfully logged out!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(SecurityUserActivity.this, MainActivity.class));
-                */
+
                 return true;
             }
 
@@ -61,6 +66,9 @@ public class SecurityUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_security_user);
+
+        database = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         toolbar = (Toolbar)findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
@@ -111,19 +119,5 @@ public class SecurityUserActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-         /*
-
-         logOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(UserActivity.this, "Successfully logged out!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(UserActivity.this, MainActivity.class));
-            }
-        });
-
-        */
     }
 }

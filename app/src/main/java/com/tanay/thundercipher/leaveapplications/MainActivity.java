@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView websiteImageView, linkedinImageView;
     Button logInButton, signUpButton;
+    FirebaseAuth auth;
 
     private void clickedButton(String url)
     {
@@ -98,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         linkedinImageView = (ImageView)findViewById(R.id.linkedinImageView);
         logInButton = (Button)findViewById(R.id.logInButton);
         signUpButton = (Button)findViewById(R.id.signUpButton);
+        auth = FirebaseAuth.getInstance();
 
         websiteImageView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class StudentUserActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class StudentUserActivity extends AppCompatActivity {
     NavigationView navigationView;
     FirebaseAuth auth;
     TextView studentWelcomeTextView;
-    FirebaseFirestore firestore;
+    FirebaseDatabase database;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -122,6 +123,6 @@ public class StudentUserActivity extends AppCompatActivity {
         });
 
         auth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
+        database = FirebaseDatabase.getInstance();
     }
 }

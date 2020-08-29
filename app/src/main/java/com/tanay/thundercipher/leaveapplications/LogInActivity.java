@@ -22,6 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,14 +40,11 @@ public class LogInActivity extends AppCompatActivity {
     ImageView googleLogInImageView;
     EditText logInEmailEditText, logInPasswordEditText;
     String logInEmail, logInPassword;
-    FirebaseFirestore firestore;
-
-    ProgressBar progressBar;
+    FirebaseDatabase database;
+    String userType;
 
     public void logInUser(String email, String password)
     {
-        progressBar.setVisibility(View.VISIBLE);
-
         auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
 
             @Override
@@ -52,8 +54,8 @@ public class LogInActivity extends AppCompatActivity {
                 Toast.makeText(LogInActivity.this, "LogIn Successful!", Toast.LENGTH_SHORT).show();
 
                 FirebaseUser user = auth.getCurrentUser();
+                DatabaseReference reference;
                 String userID = "";
-                final String[] userType = {""};
 
                 if(user != null)
                 {
@@ -63,42 +65,45 @@ public class LogInActivity extends AppCompatActivity {
                 //to get the userType
                 if (!userID.equals(""))
                 {
-                    DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(userID);
-                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    reference = database.getReference().child("Users").child(userID);
+
+                    reference.addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task)
+                        public void onDataChange(@NonNull DataSnapshot snapshot)
                         {
-                            if(task.isSuccessful())
+                            for(DataSnapshot snap : snapshot.getChildren())
                             {
-                                DocumentSnapshot doc = task.getResult();
-                                userType[0] = doc.get("User Type").toString();
+                                if(snap.getKey().equals("User Type"))
+                                {
+                                    userType = String.valueOf(snap.getValue());
+                                }
                             }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error)
+                        {
+                            Toast.makeText(LogInActivity.this, "Couldn't load user information! Try again", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
 
-                if(userType[0].equals("Student"))
+                switch (userType)
                 {
-                    progressBar.setVisibility(View.GONE);
+                    case "Student":
+                        startActivity(new Intent(LogInActivity.this, StudentUserActivity.class));
+                        finish();
+                        break;
 
-                    startActivity(new Intent(LogInActivity.this, StudentUserActivity.class));
-                    finish();
-                }
+                    case "Warden":
+                        startActivity(new Intent(LogInActivity.this, WardenUserActivity.class));
+                        finish();
+                        break;
 
-                else if(userType[0].equals("Warden"))
-                {
-                    progressBar.setVisibility(View.GONE);
-
-                    startActivity(new Intent(LogInActivity.this, WardenUserActivity.class));
-                    finish();
-                }
-
-                else if(userType[0].equals("Security Official"))
-                {
-                    progressBar.setVisibility(View.GONE);
-
-                    startActivity(new Intent(LogInActivity.this, SecurityUserActivity.class));
-                    finish();
+                    case "Security Official":
+                        startActivity(new Intent(LogInActivity.this, SecurityUserActivity.class));
+                        finish();
+                        break;
                 }
             }
         });
@@ -114,7 +119,7 @@ public class LogInActivity extends AppCompatActivity {
        logInEmailEditText = (EditText)findViewById(R.id.logInEmailEditText);
        logInPasswordEditText = (EditText)findViewById(R.id.logInPasswordEditText);
        auth = FirebaseAuth.getInstance();
-       firestore = FirebaseFirestore.getInstance();
+       database = FirebaseDatabase.getInstance();
 
        logInButton.setOnClickListener(new View.OnClickListener() {
            @Override

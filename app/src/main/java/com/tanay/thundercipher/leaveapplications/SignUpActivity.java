@@ -38,13 +38,10 @@ public class SignUpActivity extends AppCompatActivity {
     ImageView googleSignUpImageView;
     FirebaseAuth auth;
     FirebaseFirestore firestore;
-
-    ProgressBar progressBar;
+    FirebaseDatabase database;
 
     public void signUpUser(final String name, final String email, String password, final String userType)
     {
-        progressBar.setVisibility(View.VISIBLE);
-
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task)
@@ -61,17 +58,11 @@ public class SignUpActivity extends AppCompatActivity {
                     user.put("Name", name);
                     user.put("Email ID", email);
 
-                    firestore.collection("Users").document(userID).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    database.getReference().child("Users").child(userID).updateChildren(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task)
-                        {
+                        public void onSuccess(Void aVoid) {
 
-                            progressBar.setVisibility(View.GONE);
-
-                            if(task.isSuccessful())
-                            {
-                                Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_SHORT).show();
-                            }
+                            Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -115,6 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
         googleSignUpImageView = (ImageView)findViewById(R.id.googleSignUpImageView);
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.users, android.R.layout.simple_spinner_item);
