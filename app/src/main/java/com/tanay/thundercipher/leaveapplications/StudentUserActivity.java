@@ -95,7 +95,10 @@ public class StudentUserActivity extends AppCompatActivity {
                     case R.id.navigationProfile:
                     {
                         item.setChecked(true);
-                        //add code
+
+                        Intent i = new Intent(getApplicationContext(), StudentProfileActivity.class);
+                        startActivity(i);
+
                         drawerLayout.closeDrawers();
                         return true;
                     }
@@ -104,7 +107,10 @@ public class StudentUserActivity extends AppCompatActivity {
                     case R.id.navigationProfilePic:
                     {
                         item.setChecked(true);
-                        //add code
+
+                        Intent i = new Intent(getApplicationContext(), StudentProfileActivity.class);
+                        startActivity(i);
+
                         drawerLayout.closeDrawers();
                         return true;
                     }
