@@ -53,7 +53,7 @@ public class StudentUserActivity extends AppCompatActivity {
 
     public void fileApplication(String applicationName, String applicationRoll,
                                 String applicationFrom, String applicationTo,
-                                String applicationPlace, String applicationPurpose,
+                                String applicationPlace, String applicationPurpose, String studentID,
                                 boolean wardenApproval, boolean securityApproval)
     {
         //code to file the application
@@ -65,6 +65,7 @@ public class StudentUserActivity extends AppCompatActivity {
         applicationData.put("To Date", applicationTo);
         applicationData.put("Place", applicationPlace);
         applicationData.put("Purpose", applicationPurpose);
+        applicationData.put("Student ID", studentID);
         applicationData.put("Warden Approval", wardenApproval);
         applicationData.put("Security Approval", securityApproval);
 
@@ -220,7 +221,7 @@ public class StudentUserActivity extends AppCompatActivity {
                         fileApplicationToDateTextView.getText().toString(),
                         fileApplicationPlaceEditText.getText().toString(),
                         fileApplicationPurposeEditText.getText().toString(),
-                        false, false);
+                        userID, false, false);
             }
         });
 
