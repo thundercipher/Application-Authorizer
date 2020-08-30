@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +20,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class SecurityUserActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -25,6 +29,20 @@ public class SecurityUserActivity extends AppCompatActivity {
     NavigationView navigationView;
     FirebaseAuth auth;
     FirebaseDatabase database;
+
+    ArrayList<String> pendingStudentID;
+    ArrayList<String> pendingStudentName;
+    ArrayList<String> pendingStudentRoll;
+    ArrayList<String> pendingFromDate;
+    ArrayList<String> pendingToDate;
+    ArrayList<String> pendingPlace;
+    ArrayList<String> pendingPurpose;
+
+    String reviewMode = "Security";
+
+    RecyclerView securityPendingApplicationsRecyclerView;
+    RecyclerView.LayoutManager securityPendingApplicationsRecyclerViewManager;
+    PendingApplicationsRecyclerAdapter securityPendingApplicationsAdapter;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,6 +88,26 @@ public class SecurityUserActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
+
+        pendingStudentID = new ArrayList<String>();
+        pendingStudentName = new ArrayList<String>();
+        pendingStudentRoll = new ArrayList<String>();
+        pendingFromDate = new ArrayList<String>();
+        pendingToDate = new ArrayList<String>();
+        pendingPlace = new ArrayList<String>();
+        pendingPurpose = new ArrayList<String>();
+
+        securityPendingApplicationsRecyclerView = (RecyclerView)findViewById(R.id.securityPendingApplicationsRecyclerView);
+        securityPendingApplicationsRecyclerViewManager = new LinearLayoutManager(this);
+        securityPendingApplicationsRecyclerView.setLayoutManager(securityPendingApplicationsRecyclerViewManager);
+
+        //add code to store application data in arrayList and then, after notifyDataSetChanged() , write the following code inside the valueEventListener's onSuccess itself:
+        securityPendingApplicationsAdapter = new PendingApplicationsRecyclerAdapter(pendingStudentID, pendingStudentName,
+                                                                                    pendingStudentRoll, pendingFromDate,
+                                                                                    pendingToDate, pendingPlace, pendingPurpose,
+                                                                                    reviewMode, this);
+        //setHasFixedSize() would be false here
+        securityPendingApplicationsRecyclerView.setAdapter(securityPendingApplicationsAdapter);
 
         toolbar = (Toolbar)findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);

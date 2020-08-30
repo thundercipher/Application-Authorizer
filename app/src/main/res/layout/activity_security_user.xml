@@ -17,6 +17,13 @@
             layout="@layout/toolbar_layout">
         </include>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:id="@+id/securityPendingApplicationsRecyclerView"
+            android:layout_marginTop="55dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
