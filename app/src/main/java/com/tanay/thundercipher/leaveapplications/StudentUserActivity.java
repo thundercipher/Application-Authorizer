@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class StudentUserActivity extends AppCompatActivity {
 
@@ -48,11 +49,26 @@ public class StudentUserActivity extends AppCompatActivity {
 
     static String fileApplicationFromDate, fileApplicationToDate;
     String fileApplicationName, fileApplicationRoll, userID;
-    Application application;
+    int counter = 0;
 
-    public void fileApplication(Application app)
+    public void fileApplication(String applicationName, String applicationRoll,
+                                String applicationFrom, String applicationTo,
+                                String applicationPlace, String applicationPurpose,
+                                boolean wardenApproval, boolean securityApproval)
     {
         //code to file the application
+        counter++;
+        HashMap<String, Object> applicationData = new HashMap<>();
+        applicationData.put("Name", applicationName);
+        applicationData.put("Roll Number", applicationRoll);
+        applicationData.put("From Date", applicationFrom);
+        applicationData.put("To Date", applicationTo);
+        applicationData.put("Place", applicationPlace);
+        applicationData.put("Purpose", applicationPurpose);
+        applicationData.put("Warden Approval", wardenApproval);
+        applicationData.put("Security Approval", securityApproval);
+
+        database.getReference().child("Users").child(userID).child("Applications").updateChildren(applicationData);
     }
 
     @Override
@@ -175,22 +191,6 @@ public class StudentUserActivity extends AppCompatActivity {
             }
         });
 
-        fileApplicationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-
-                application = new Application(fileApplicationName, fileApplicationRoll,
-                        fileApplicationFromDateTextView.getText().toString(),
-                        fileApplicationToDateTextView.getText().toString(),
-                        fileApplicationPlaceEditText.getText().toString(),
-                        fileApplicationPurposeEditText.getText().toString(),
-                        false, false);
-
-                fileApplication(application);
-            }
-        });
-
         fileApplicationFromDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -209,6 +209,20 @@ public class StudentUserActivity extends AppCompatActivity {
             }
         });
 
+
+        fileApplicationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+
+                fileApplication(fileApplicationName, fileApplicationRoll,
+                        fileApplicationFromDateTextView.getText().toString(),
+                        fileApplicationToDateTextView.getText().toString(),
+                        fileApplicationPlaceEditText.getText().toString(),
+                        fileApplicationPurposeEditText.getText().toString(),
+                        false, false);
+            }
+        });
 
         //toolbar and navigation drawer
         toolbar = (Toolbar)findViewById(R.id.toolBar);
