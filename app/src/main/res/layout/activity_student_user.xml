@@ -12,19 +12,123 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="@drawable/paperbg">
 
         <include
             android:id="@+id/include"
             layout="@layout/toolbar_layout" />
 
         <TextView
-            android:id="@+id/studentWelcomeTextView"
+            android:id="@+id/fileApplicationTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:text="File Your Application"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/fileApplicationPlaceEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="25dp"
+            android:ems="10"
+            android:hint="Place of visit"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.323"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fileApplicationToDateButton" />
+
+        <TextView
+            android:id="@+id/fileApplicationFromDateTextView"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="100dp"
+            android:ems="10"
+            android:text="From Date"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fileApplicationTitleTextView" />
+
+        <TextView
+            android:id="@+id/fileApplicationToDateTextView"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:ems="10"
+            android:text="To Date"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fileApplicationFromDateTextView" />
+
+        <EditText
+            android:id="@+id/fileApplicationPurposeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
             android:layout_marginTop="30dp"
-            app:layout_constraintTop_toBottomOf="@+id/include"
-            tools:layout_editor_absoluteX="193dp" />
+            android:layout_marginRight="25dp"
+            android:ems="10"
+            android:hint="Purpose of visit"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fileApplicationPlaceEditText" />
+
+        <Button
+            android:id="@+id/fileApplicationButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:background="@android:color/black"
+            android:text="File Application"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fileApplicationPurposeEditText" />
+
+        <Button
+            android:id="@+id/fileApplicationFromDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:text="Pick Date"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fileApplicationFromDateTextView" />
+
+        <Button
+            android:id="@+id/fileApplicationToDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:text="Pick Date"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fileApplicationToDateTextView" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

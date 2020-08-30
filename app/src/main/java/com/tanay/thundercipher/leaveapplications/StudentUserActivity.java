@@ -12,12 +12,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class StudentUserActivity extends AppCompatActivity {
@@ -26,8 +32,16 @@ public class StudentUserActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     FirebaseAuth auth;
-    TextView studentWelcomeTextView;
     FirebaseDatabase database;
+    DatabaseReference reference;
+
+    static TextView fileApplicationFromDateTextView, fileApplicationToDateTextView;
+    EditText fileApplicationPlaceEditText, fileApplicationPurposeEditText;
+    Button fileApplicationButton, fileApplicationFromDateButton, fileApplicationToDateButton;
+
+    static String fileApplicationFromDate, fileApplicationToDate;
+    String fileApplicationName, fileApplicationRoll, userID;
+    Application application;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -71,7 +85,49 @@ public class StudentUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_user);
 
-        studentWelcomeTextView = (TextView)findViewById(R.id.studentWelcomeTextView);
+        fileApplicationFromDateTextView = (TextView)findViewById(R.id.fileApplicationFromDateTextView);
+        fileApplicationToDateTextView = (TextView)findViewById(R.id.fileApplicationToDateTextView);
+        fileApplicationPlaceEditText = (EditText)findViewById(R.id.fileApplicationPlaceEditText);
+        fileApplicationPurposeEditText = (EditText)findViewById(R.id.fileApplicationPurposeEditText);
+        fileApplicationButton = (Button)findViewById(R.id.fileApplicationButton);
+        fileApplicationFromDateButton = (Button)findViewById(R.id.fileApplicationFromDateButton);
+        fileApplicationToDateButton = (Button)findViewById(R.id.fileApplicationToDateButton);
+
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
+        //creating application object
+        userID = auth.getCurrentUser().getUid();
+        reference = database.getReference().child("Users").child(userID);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                for(DataSnapshot snap : snapshot.getChildren())
+                {
+                    if(snap.getKey().equals("Name"))
+                    {
+                        fileApplicationName = snap.getValue().toString();
+                    }
+
+                    else if(snap.getKey().equals("Roll Number"))
+                    {
+                        fileApplicationRoll = snap.getValue().toString();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error)
+            {
+                Toast.makeText(getApplicationContext(), "Failed to retrieve information!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        //toolbar and navigation drawer
         toolbar = (Toolbar)findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 
@@ -130,8 +186,5 @@ public class StudentUserActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
     }
 }
