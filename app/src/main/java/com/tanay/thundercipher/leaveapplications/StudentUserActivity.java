@@ -118,7 +118,10 @@ public class StudentUserActivity extends AppCompatActivity {
                     case R.id.navigationContactInfo:
                     {
                         item.setChecked(true);
-                        //add code
+
+                        Intent i = new Intent(getApplicationContext(), WardenListActivity.class);
+                        startActivity(i);
+
                         drawerLayout.closeDrawers();
                         return true;
                     }
