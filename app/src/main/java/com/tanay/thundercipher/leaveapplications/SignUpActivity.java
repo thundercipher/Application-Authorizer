@@ -37,7 +37,6 @@ public class SignUpActivity extends AppCompatActivity {
     Button signUpButton;
     ImageView googleSignUpImageView;
     FirebaseAuth auth;
-    FirebaseFirestore firestore;
     FirebaseDatabase database;
 
     public void signUpUser(final String name, final String email, String password, final String userType)
@@ -105,7 +104,6 @@ public class SignUpActivity extends AppCompatActivity {
         signUpButton = (Button)findViewById(R.id.signUpButton);
         googleSignUpImageView = (ImageView)findViewById(R.id.googleSignUpImageView);
         auth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
         database = FirebaseDatabase.getInstance();
 
         // Create an ArrayAdapter using the string array and a default spinner layout
