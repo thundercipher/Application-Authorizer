@@ -40,15 +40,15 @@ public class WardenUserActivity extends AppCompatActivity {
 
         switch (item.getItemId())
         {
-            case android.R.id.home :
+            /*case android.R.id.home :
             {
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             }
+             */
 
             case R.id.menuActionLogout :
             {
-
                 auth.signOut();
                 Toast.makeText(getApplicationContext(), "Successfully logged out!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(WardenUserActivity.this, MainActivity.class));
@@ -74,13 +74,14 @@ public class WardenUserActivity extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 
-        ActionBar actionBar = getSupportActionBar();
+        /*ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null)
         {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         }
+
 
         drawerLayout = (DrawerLayout)findViewById(R.id.wardenDrawerLayout);
         navigationView = (NavigationView)findViewById(R.id.wardenNavigationView);
@@ -120,5 +121,6 @@ public class WardenUserActivity extends AppCompatActivity {
                 return false;
             }
         });
+         */
     }
 }

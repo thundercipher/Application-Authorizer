@@ -40,11 +40,12 @@ public class SecurityUserActivity extends AppCompatActivity {
 
         switch (item.getItemId())
         {
-            case android.R.id.home :
+            /*case android.R.id.home :
             {
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             }
+             */
 
             case R.id.menuActionLogout :
             {
@@ -73,7 +74,7 @@ public class SecurityUserActivity extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 
-        ActionBar actionBar = getSupportActionBar();
+        /*ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null)
         {
@@ -119,5 +120,6 @@ public class SecurityUserActivity extends AppCompatActivity {
                 return false;
             }
         });
+         */
     }
 }

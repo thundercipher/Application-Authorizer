@@ -19,7 +19,7 @@
     <item
         android:id="@+id/navigationContactInfo"
         android:icon="@drawable/ic_contacts"
-        android:title="Contact Information">
+        android:title="Contact">
     </item>
 
     </group>
