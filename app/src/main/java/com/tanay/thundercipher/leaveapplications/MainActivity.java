@@ -16,15 +16,23 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView websiteImageView, linkedinImageView;
+    ImageView websiteImageView, linkedInImageView;
     Button logInButton, signUpButton;
+
     FirebaseAuth auth;
+    FirebaseDatabase database;
+    String userID, userType;
 
     private void clickedButton(String url)
     {
@@ -48,44 +56,48 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if(user != null)
+        if (user != null)
         {
-           String userEmail = user.getEmail();
-           DocumentReference docRef = null;
+            userID = user.getUid();
+            DatabaseReference reference = database.getReference().child("Users").child(userID);
 
-           if(userEmail != null)
-           {
-               docRef = FirebaseFirestore.getInstance().collection("Users").document(userEmail);
-               docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                   @Override
-                   public void onComplete(@NonNull Task<DocumentSnapshot> task)
-                   {
-                       if(task.isSuccessful())
-                       {
-                           DocumentSnapshot doc = task.getResult();
-                           String userType = doc.getString("User Type");
+            reference.addValueEventListener(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot)
+                {
+                    for(DataSnapshot snap : snapshot.getChildren())
+                    {
+                        if(snap.getKey().equals("User Type"))
+                        {
+                            userType = String.valueOf(snap.getValue());
+                        }
+                    }
 
-                           if(userType.equals("Student"))
-                           {
-                               Intent i = new Intent(getApplicationContext(), StudentUserActivity.class);
-                               startActivity(i);
-                           }
+                    if(userType.equals("Student"))
+                    {
+                        Intent i = new Intent(getApplicationContext(), StudentUserActivity.class);
+                        startActivity(i);
+                    }
 
-                           else if(userType.equals("Warden"))
-                           {
-                               Intent i = new Intent(getApplicationContext(), WardenUserActivity.class);
-                               startActivity(i);
-                           }
+                    else if(userType.equals("Warden"))
+                    {
+                        Intent i = new Intent(getApplicationContext(), WardenUserActivity.class);
+                        startActivity(i);
+                    }
 
-                           else if(userType.equals("Security Official"))
-                           {
-                               Intent i = new Intent(getApplicationContext(), SecurityUserActivity.class);
-                               startActivity(i);
-                           }
-                       }
-                   }
-               });
-           }
+                    else if(userType.equals("Security Official"))
+                    {
+                        Intent i = new Intent(getApplicationContext(), SecurityUserActivity.class);
+                        startActivity(i);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
     }
 
@@ -96,10 +108,12 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle("Application Authorizer");
         websiteImageView = (ImageView)findViewById(R.id.websiteImageView);
-        linkedinImageView = (ImageView)findViewById(R.id.linkedinImageView);
+        linkedInImageView = (ImageView)findViewById(R.id.linkedInImageView);
         logInButton = (Button)findViewById(R.id.logInButton);
         signUpButton = (Button)findViewById(R.id.signUpButton);
+        
         auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         websiteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        linkedinImageView.setOnClickListener(new View.OnClickListener() {
+        linkedInImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
