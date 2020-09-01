@@ -96,7 +96,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:background="@android:color/black"
+            android:background="@drawable/button_background"
             android:text="File Application"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,9 +106,9 @@
 
         <Button
             android:id="@+id/fileApplicationFromDateButton"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/black"
+            android:background="@drawable/button_background"
             android:text="Pick Date"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -118,9 +118,9 @@
 
         <Button
             android:id="@+id/fileApplicationToDateButton"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/black"
+            android:background="@drawable/button_background"
             android:text="Pick Date"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"

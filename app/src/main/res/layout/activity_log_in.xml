@@ -64,7 +64,7 @@
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:background="@android:color/black"
+        android:background="@drawable/button_background"
         android:text="Log In"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
