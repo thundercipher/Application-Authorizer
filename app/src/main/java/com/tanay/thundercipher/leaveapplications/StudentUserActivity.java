@@ -69,7 +69,7 @@ public class StudentUserActivity extends AppCompatActivity {
         applicationData.put("Warden Approval", wardenApproval);
         applicationData.put("Security Approval", securityApproval);
 
-        database.getReference().child("Users").child(userID).child("Applications").updateChildren(applicationData);
+        database.getReference().child("Users").child(userID).child("Application").updateChildren(applicationData);
     }
 
     @Override

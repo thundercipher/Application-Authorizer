@@ -18,7 +18,10 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -63,7 +66,7 @@ public class SecurityUserActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             }
-             */
+            */
 
             case R.id.menuActionLogout :
             {
@@ -80,6 +83,77 @@ public class SecurityUserActivity extends AppCompatActivity {
             }
         }
     }
+
+    ValueEventListener valueEventListener = new ValueEventListener()
+    {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot)
+        {
+            pendingStudentID.clear();
+            pendingStudentRoll.clear();
+            pendingStudentName.clear();
+            pendingFromDate.clear();
+            pendingToDate.clear();
+            pendingPlace.clear();
+            pendingPurpose.clear();
+
+            for(DataSnapshot uidSnap : snapshot.getChildren())
+            {
+                for(DataSnapshot userInfoSnap : uidSnap.getChildren())
+                {
+                    if(userInfoSnap.getKey().equals("Application"))
+                    {
+                        for(DataSnapshot applicationSnap : userInfoSnap.getChildren())
+                        {
+                            if(applicationSnap.getKey().equals("Student ID"))
+                            {
+                                pendingStudentID.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Name"))
+                            {
+                                pendingStudentName.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Roll Number"))
+                            {
+                                pendingStudentRoll.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("From Date"))
+                            {
+                                pendingFromDate.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("To Date"))
+                            {
+                                pendingToDate.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Place"))
+                            {
+                                pendingPlace.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Purpose"))
+                            {
+                                pendingPurpose.add(applicationSnap.getValue().toString());
+                            }
+                        }
+                    }
+                }
+            }
+
+            securityPendingApplicationsAdapter.notifyDataSetChanged();
+            Toast.makeText(getApplicationContext(), "Data updated!", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error)
+        {
+            Toast.makeText(getApplicationContext(), "Couldn't refresh data!", Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +183,10 @@ public class SecurityUserActivity extends AppCompatActivity {
         //setHasFixedSize() would be false here
         securityPendingApplicationsRecyclerView.setAdapter(securityPendingApplicationsAdapter);
 
+        //code for the query
+        database.getReference("Users").addListenerForSingleValueEvent(valueEventListener);
+
+        //code for the toolbar
         toolbar = (Toolbar)findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
 

@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         linkedInImageView = (ImageView)findViewById(R.id.linkedInImageView);
         logInButton = (Button)findViewById(R.id.logInButton);
         signUpButton = (Button)findViewById(R.id.signUpButton);
-        
+
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
