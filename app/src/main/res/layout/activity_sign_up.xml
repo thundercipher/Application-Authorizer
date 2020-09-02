@@ -94,24 +94,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signUpPasswordEditText" />
 
-    <TextView
-        android:id="@+id/googleSignUpTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Or, you can Sign Up with Google"
-        android:textColor="#2843DC"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
-
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/button_background"
         android:text="Sign Up"
         android:textColor="@android:color/white"
@@ -119,17 +106,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usersListSpinner" />
-
-    <ImageView
-        android:id="@+id/googleSignUpImageView"
-        android:layout_width="271dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="15dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/googleSignUpTextView"
-        app:srcCompat="@drawable/signup" />
 
     <EditText
         android:id="@+id/signUpNameEditText"

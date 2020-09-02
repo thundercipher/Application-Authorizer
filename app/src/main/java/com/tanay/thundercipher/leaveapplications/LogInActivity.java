@@ -37,7 +37,6 @@ public class LogInActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     Button logInButton;
-    ImageView googleLogInImageView;
     EditText logInEmailEditText, logInPasswordEditText;
     String logInEmail, logInPassword;
     FirebaseDatabase database;
@@ -115,7 +114,6 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
        logInButton = (Button)findViewById(R.id.logInButton);
-       googleLogInImageView = (ImageView)findViewById(R.id.googleLogInImageView);
        logInEmailEditText = (EditText)findViewById(R.id.logInEmailEditText);
        logInPasswordEditText = (EditText)findViewById(R.id.logInPasswordEditText);
        auth = FirebaseAuth.getInstance();

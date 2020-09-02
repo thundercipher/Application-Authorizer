@@ -26,7 +26,7 @@
         android:id="@+id/logInLogoImageView"
         android:layout_width="64dp"
         android:layout_height="57dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -37,7 +37,7 @@
         android:id="@+id/logInEmailEditText"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="170dp"
         android:ems="10"
         android:hint="Email address"
         android:inputType="textEmailAddress"
@@ -63,7 +63,7 @@
         android:id="@+id/logInButton"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/button_background"
         android:text="Log In"
         android:textColor="@android:color/white"
@@ -76,7 +76,7 @@
         android:id="@+id/instructionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="100dp"
         android:text="Log into your account:"
         android:textColor="#2843DC"
         android:textSize="18sp"
@@ -84,31 +84,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logInTitleTextView" />
-
-    <TextView
-        android:id="@+id/googleLogInTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="Or, Sign In with Google"
-        android:textColor="#2843DC"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logInButton" />
-
-    <ImageView
-        android:id="@+id/googleLogInImageView"
-        android:layout_width="271dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="9dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/googleLogInTextView"
-        app:srcCompat="@drawable/login" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

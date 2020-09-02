@@ -35,7 +35,6 @@ public class SignUpActivity extends AppCompatActivity {
     String signUpMethod,signUpEmail,signUpPassword, signUpName, userID;
     EditText signUpEmailEditText, signUpPasswordEditText, signUpNameEditText;
     Button signUpButton;
-    ImageView googleSignUpImageView;
     FirebaseAuth auth;
     FirebaseDatabase database;
 
@@ -102,7 +101,6 @@ public class SignUpActivity extends AppCompatActivity {
         signUpPasswordEditText = (EditText)findViewById(R.id.signUpPasswordEditText);
         signUpNameEditText = (EditText)findViewById(R.id.signUpNameEditText);
         signUpButton = (Button)findViewById(R.id.signUpButton);
-        googleSignUpImageView = (ImageView)findViewById(R.id.googleSignUpImageView);
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
