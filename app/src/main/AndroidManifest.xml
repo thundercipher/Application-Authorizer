@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PendingApplicationsDisplayActivity"></activity>
+        <activity android:name=".StudentApplicationStatusActivity"></activity>
+        <activity android:name=".PendingApplicationsDisplayActivity" />
         <activity android:name=".WardenListActivity" />
         <activity android:name=".StudentProfileEditActivity" />
         <activity android:name=".StudentProfileActivity" />

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Review Application"
+        android:text="View Your Application"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,14 +24,14 @@
     <LinearLayout
         android:id="@+id/leftLinearLayout"
         android:layout_width="200dp"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
         android:layout_marginTop="70dp"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reviewTitleTextView">
 
         <TextView
-            android:id="@+id/askNameTextView"
+            android:id="@+id/askNameStudentTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical|center_horizontal"
@@ -40,7 +40,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/askRollNumberTextView"
+            android:id="@+id/askRollNumberStudentTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical|center_horizontal"
@@ -49,7 +49,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/askPlaceTextView"
+            android:id="@+id/askPlaceStudentTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical|center_horizontal"
@@ -58,7 +58,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/askFromDateTextView"
+            android:id="@+id/askFromDateStudentTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical|center_horizontal"
@@ -67,7 +67,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/askToDateTextView"
+            android:id="@+id/askToDateStudentTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical|center_horizontal"
@@ -76,11 +76,20 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/askPurposeTextView"
+            android:id="@+id/askPurposeStudentTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical|center_horizontal"
             android:text="Purpose of Visit:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/askStatusStudentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Status:"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -89,14 +98,14 @@
     <LinearLayout
         android:id="@+id/rightLinearLayout"
         android:layout_width="200dp"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
         android:layout_marginTop="70dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reviewTitleTextView">
 
         <TextView
-            android:id="@+id/tellNameTextView"
+            android:id="@+id/tellNameStudentTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical|start"
@@ -106,27 +115,7 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/tellRollNumberTextView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical|start"
-            android:paddingLeft="10dp"
-            android:text=""
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/tellPlaceTextView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical|start"
-            android:paddingLeft="10dp"
-            android:text=""
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/tellFromDateTextView"
+            android:id="@+id/tellRollNumberStudentTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical|start"
@@ -136,7 +125,7 @@
             android:textSize="17sp"/>
 
         <TextView
-            android:id="@+id/tellToDateTextView"
+            android:id="@+id/tellPlaceStudentTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical|start"
@@ -146,7 +135,37 @@
             android:textSize="17sp"/>
 
         <TextView
-            android:id="@+id/tellPurposeTextView"
+            android:id="@+id/tellFromDateStudentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|start"
+            android:paddingLeft="10dp"
+            android:text=""
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/tellToDateStudentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|start"
+            android:paddingLeft="10dp"
+            android:text=""
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/tellPurposeStudentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|start"
+            android:paddingLeft="10dp"
+            android:text=""
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/tellStatusStudentTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical|start"
@@ -157,30 +176,5 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/approveButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Approve"
-        android:textColor="@android:color/white"
-        android:background="@drawable/button_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rightLinearLayout" />
-
-    <Button
-        android:id="@+id/declineButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Decline"
-        android:textColor="@android:color/white"
-        android:background="@drawable/button_background_red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/approveButton" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
