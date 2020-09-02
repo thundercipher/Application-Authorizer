@@ -75,6 +75,9 @@ public class StudentUserActivity extends AppCompatActivity {
         applicationData.put("Security Approval", securityApproval);
 
         database.getReference().child("Users").child(userID).child("Application").updateChildren(applicationData);
+
+        Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
+        startActivity(i);
     }
 
     ValueEventListener valueEventListenerForStatusNavigation = new ValueEventListener()
