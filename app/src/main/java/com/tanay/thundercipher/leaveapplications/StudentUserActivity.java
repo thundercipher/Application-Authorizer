@@ -77,7 +77,7 @@ public class StudentUserActivity extends AppCompatActivity {
         database.getReference().child("Users").child(userID).child("Application").updateChildren(applicationData);
     }
 
-    ValueEventListener valueEventListener = new ValueEventListener()
+    ValueEventListener valueEventListenerForStatusNavigation = new ValueEventListener()
     {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot)
@@ -86,7 +86,12 @@ public class StudentUserActivity extends AppCompatActivity {
             {
                 checkDate = snapshot.getValue().toString();
 
-                //add code to compare dates and navigate to StudentApplicationStatusActivity if necessary
+                //code to compare dates and navigate to StudentApplicationStatusActivity if necessary
+                if (currentDate.compareTo(checkDate) <= 0)
+                {
+                    Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
+                    startActivity(i);
+                }
             }
         }
 
@@ -209,7 +214,7 @@ public class StudentUserActivity extends AppCompatActivity {
 
                     else if(snap.getKey().equals("Application"))
                     {
-                        database.getReference().child("Users").child(userID).child("Application").addListenerForSingleValueEvent(valueEventListener);
+                        database.getReference().child("Users").child(userID).child("Application").addListenerForSingleValueEvent(valueEventListenerForStatusNavigation);
                     }
                 }
             }
