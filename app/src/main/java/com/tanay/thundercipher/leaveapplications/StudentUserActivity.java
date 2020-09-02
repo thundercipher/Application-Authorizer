@@ -31,8 +31,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.CDATASection;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class StudentUserActivity extends AppCompatActivity {
 
@@ -48,7 +53,7 @@ public class StudentUserActivity extends AppCompatActivity {
     Button fileApplicationButton, fileApplicationFromDateButton, fileApplicationToDateButton;
 
     static String fileApplicationFromDate, fileApplicationToDate;
-    String fileApplicationName, fileApplicationRoll, userID;
+    String fileApplicationName, fileApplicationRoll, userID, checkDate, currentDate;
     int counter = 0;
 
     public void fileApplication(String applicationName, String applicationRoll,
@@ -71,6 +76,25 @@ public class StudentUserActivity extends AppCompatActivity {
 
         database.getReference().child("Users").child(userID).child("Application").updateChildren(applicationData);
     }
+
+    ValueEventListener valueEventListener = new ValueEventListener()
+    {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot)
+        {
+            if(snapshot.getKey().equals("To Date"))
+            {
+                checkDate = snapshot.getValue().toString();
+
+                //add code to compare dates and navigate to StudentApplicationStatusActivity if necessary
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -160,10 +184,10 @@ public class StudentUserActivity extends AppCompatActivity {
         fileApplicationFromDateButton = (Button)findViewById(R.id.fileApplicationFromDateButton);
         fileApplicationToDateButton = (Button)findViewById(R.id.fileApplicationToDateButton);
 
+        currentDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
-        //creating application object
         userID = auth.getCurrentUser().getUid();
         reference = database.getReference().child("Users").child(userID);
 
@@ -181,6 +205,11 @@ public class StudentUserActivity extends AppCompatActivity {
                     else if(snap.getKey().equals("Roll Number"))
                     {
                         fileApplicationRoll = snap.getValue().toString();
+                    }
+
+                    else if(snap.getKey().equals("Application"))
+                    {
+                        database.getReference().child("Users").child(userID).child("Application").addListenerForSingleValueEvent(valueEventListener);
                     }
                 }
             }
