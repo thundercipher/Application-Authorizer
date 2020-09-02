@@ -12,7 +12,7 @@ public class PendingApplicationsDisplayActivity extends AppCompatActivity {
 
     TextView tellNameTextView, tellRollNumberTextView, tellPlaceTextView, tellFromDateTextView, tellToDateTextView, tellPurposeTextView;
     Button approveButton, declineButton;
-    String name, roll, fromDate, toDate, place, purpose, studentID, mode;
+    String name = "", roll= "", fromDate= "", toDate = "", place = "", purpose = "", studentID = "", mode = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

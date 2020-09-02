@@ -35,7 +35,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     StorageReference mStorageRef;
     FirebaseAuth auth;
 
-    String userID;
+    String userID = "";
 
     public void edit(View view)
     {

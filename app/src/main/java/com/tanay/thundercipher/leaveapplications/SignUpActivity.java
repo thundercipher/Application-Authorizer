@@ -32,7 +32,7 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity {
 
     Spinner usersListSpinner;
-    String signUpMethod,signUpEmail,signUpPassword, signUpName, userID;
+    String signUpMethod = "", signUpEmail = "", signUpPassword = "", signUpName = "", userID = "";
     EditText signUpEmailEditText, signUpPasswordEditText, signUpNameEditText;
     Button signUpButton;
     FirebaseAuth auth;

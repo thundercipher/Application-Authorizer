@@ -23,7 +23,7 @@ public class StudentProfileEditActivity extends AppCompatActivity {
     EditText studentProfileEditNameEditText, studentProfileEditRollNumberEditText, studentProfileEditHostelEditText, studentProfileEditPhoneEditText;
     Button studentProfileEditSaveButton;
 
-    String studentProfileEditName, studentProfileEditRoll, studentProfileEditHostel, studentProfileEditPhone, userID;
+    String studentProfileEditName = "", studentProfileEditRoll = "", studentProfileEditHostel = "", studentProfileEditPhone = "", userID = "";
     FirebaseDatabase database;
     FirebaseAuth auth;
 

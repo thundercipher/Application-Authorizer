@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseDatabase database;
-    String userID, userType;
+    String userID = "", userType = "";
 
     private void clickedButton(String url)
     {
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     for(DataSnapshot snap : snapshot.getChildren())
                     {
-                        if(snap.getKey().equals("User Type"))
+                        if((snap.getKey() != null) && snap.getKey().equals("User Type"))
                         {
                             userType = String.valueOf(snap.getValue());
                         }

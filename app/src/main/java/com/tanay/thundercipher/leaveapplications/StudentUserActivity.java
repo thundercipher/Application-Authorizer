@@ -53,7 +53,7 @@ public class StudentUserActivity extends AppCompatActivity {
     Button fileApplicationButton, fileApplicationFromDateButton, fileApplicationToDateButton;
 
     static String fileApplicationFromDate, fileApplicationToDate;
-    String fileApplicationName, fileApplicationRoll, userID, checkDate, currentDate;
+    String fileApplicationName = "", fileApplicationRoll = "", userID = "", checkDate = "", currentDate = "";
     int counter = 0;
 
     public void fileApplication(String applicationName, String applicationRoll,

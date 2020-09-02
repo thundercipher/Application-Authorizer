@@ -40,7 +40,7 @@ public class LogInActivity extends AppCompatActivity {
     EditText logInEmailEditText, logInPasswordEditText;
     String logInEmail, logInPassword;
     FirebaseDatabase database;
-    String userType;
+    String userType = "";
 
     public void logInUser(String email, String password)
     {

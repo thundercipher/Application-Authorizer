@@ -23,7 +23,7 @@ public class StudentApplicationStatusActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference reference;
-    String userID;
+    String userID = "";
     boolean wardenApproval, securityApproval;
 
     ValueEventListener valueEventListener = new ValueEventListener() {
