@@ -186,7 +186,9 @@ public class WardenUserActivity extends AppCompatActivity {
         wardenPendingApplicationsRecyclerView.setAdapter(wardenPendingApplicationsAdapter);
 
         //code for the query
-        database.getReference("Users").addListenerForSingleValueEvent(valueEventListener);
+        Query query = database.getReference("Users");
+        query.orderByChild("Warden Approval").equalTo("false");
+        query.addListenerForSingleValueEvent(valueEventListener);
 
         //code for the toolbar
         toolbar = (Toolbar)findViewById(R.id.toolBar);

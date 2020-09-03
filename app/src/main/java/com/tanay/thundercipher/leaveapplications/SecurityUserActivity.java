@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -185,6 +186,10 @@ public class SecurityUserActivity extends AppCompatActivity {
 
         //code for the query
         database.getReference("Users").addListenerForSingleValueEvent(valueEventListener);
+        Query query = database.getReference("Users");
+        query.orderByChild("Security Approval").equalTo("false");
+        query.addListenerForSingleValueEvent(valueEventListener);
+
 
         //code for the toolbar
         toolbar = (Toolbar)findViewById(R.id.toolBar);
