@@ -32,7 +32,6 @@ public class PendingApplicationsDisplayActivity extends AppCompatActivity {
         tellPurposeTextView = (TextView)findViewById(R.id.tellPurposeTextView);
 
         actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Application Authorizer");
 
         Intent i = getIntent();

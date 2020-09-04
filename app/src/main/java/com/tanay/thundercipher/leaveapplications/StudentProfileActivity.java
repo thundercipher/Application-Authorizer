@@ -114,7 +114,6 @@ public class StudentProfileActivity extends AppCompatActivity {
         studentProfileUpdatePhotoImageView = (ImageView)findViewById(R.id.studentProfileUpdatePhotoimageView);
 
         actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Application Authorizer");
 
         Intent i = getIntent();

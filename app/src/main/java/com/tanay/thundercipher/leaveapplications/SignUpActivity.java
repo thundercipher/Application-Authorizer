@@ -99,7 +99,6 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Application Authorizer");
 
         usersListSpinner = (Spinner)findViewById(R.id.usersListSpinner);

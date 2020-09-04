@@ -122,7 +122,6 @@ public class LogInActivity extends AppCompatActivity {
        database = FirebaseDatabase.getInstance();
 
         actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Application Authorizer");
 
        logInButton.setOnClickListener(new View.OnClickListener() {

@@ -28,7 +28,6 @@ public class WardenListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_warden_list);
 
         actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Application Authorizer");
 
         wardenListRecyclerView = (RecyclerView)findViewById(R.id.wardenListRecyclerView);

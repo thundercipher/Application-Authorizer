@@ -193,7 +193,6 @@ public class SecurityUserActivity extends AppCompatActivity {
 
         //code for the toolbar
         actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Application Authorizer");
 
         /*drawerLayout = (DrawerLayout)findViewById(R.id.securityDrawerLayout);

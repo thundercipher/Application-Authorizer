@@ -43,7 +43,6 @@ public class StudentProfileEditActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Application Authorizer");
 
         database = FirebaseDatabase.getInstance();

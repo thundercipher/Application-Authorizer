@@ -123,7 +123,6 @@ public class StudentApplicationStatusActivity extends AppCompatActivity {
         tellStatusStudentTextView = (TextView)findViewById(R.id.tellStatusStudentTextView);
 
         actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Application Authorizer");
 
         auth = FirebaseAuth.getInstance();
