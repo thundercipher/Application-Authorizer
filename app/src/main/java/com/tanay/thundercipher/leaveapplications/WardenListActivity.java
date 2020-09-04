@@ -28,7 +28,7 @@ public class WardenListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_warden_list);
 
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Application Authorizer");
+        actionBar.setTitle("Wardens");
 
         wardenListRecyclerView = (RecyclerView)findViewById(R.id.wardenListRecyclerView);
         manager = new LinearLayoutManager(this);

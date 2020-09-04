@@ -77,6 +77,24 @@ public class LogInActivity extends AppCompatActivity {
                                 if(snap.getKey().equals("User Type"))
                                 {
                                     userType = String.valueOf(snap.getValue());
+
+                                    switch (userType)
+                                    {
+                                        case "Student":
+                                            startActivity(new Intent(LogInActivity.this, StudentUserActivity.class));
+                                            finish();
+                                            break;
+
+                                        case "Warden":
+                                            startActivity(new Intent(LogInActivity.this, WardenUserActivity.class));
+                                            finish();
+                                            break;
+
+                                        case "Security Official":
+                                            startActivity(new Intent(LogInActivity.this, SecurityUserActivity.class));
+                                            finish();
+                                            break;
+                                    }
                                 }
                             }
                         }
@@ -87,24 +105,6 @@ public class LogInActivity extends AppCompatActivity {
                             Toast.makeText(LogInActivity.this, "Couldn't load user information! Try again", Toast.LENGTH_SHORT).show();
                         }
                     });
-                }
-
-                switch (userType)
-                {
-                    case "Student":
-                        startActivity(new Intent(LogInActivity.this, StudentUserActivity.class));
-                        finish();
-                        break;
-
-                    case "Warden":
-                        startActivity(new Intent(LogInActivity.this, WardenUserActivity.class));
-                        finish();
-                        break;
-
-                    case "Security Official":
-                        startActivity(new Intent(LogInActivity.this, SecurityUserActivity.class));
-                        finish();
-                        break;
                 }
             }
         });

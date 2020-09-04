@@ -114,7 +114,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         studentProfileUpdatePhotoImageView = (ImageView)findViewById(R.id.studentProfileUpdatePhotoimageView);
 
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Application Authorizer");
+        actionBar.setTitle("Your Profile");
 
         Intent i = getIntent();
         auth = FirebaseAuth.getInstance();
