@@ -1,6 +1,7 @@
 package com.tanay.thundercipher.leaveapplications;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
     String userID = "", userType = "";
+    ActionBar actionBar;
 
     private void clickedButton(String url)
     {
@@ -114,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+
+        actionBar = getSupportActionBar();
+        actionBar.hide();
 
         websiteImageView.setOnClickListener(new View.OnClickListener() {
             @Override
