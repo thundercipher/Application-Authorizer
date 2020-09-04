@@ -19,7 +19,7 @@
             android:id="@+id/fileApplicationTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="55dp"
             android:text="File Your Application"
             android:textColor="@android:color/black"
             android:textSize="30sp"
