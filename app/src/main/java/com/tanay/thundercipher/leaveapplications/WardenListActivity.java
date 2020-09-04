@@ -1,6 +1,7 @@
 package com.tanay.thundercipher.leaveapplications;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ public class WardenListActivity extends AppCompatActivity {
     RecyclerView wardenListRecyclerView;
     RecyclerView.LayoutManager manager;
     WardenRecyclerAdapter wardenRecyclerAdapter;
+    Toolbar toolbar;
 
     int[] wardenImages = {R.drawable.pic0, R.drawable.pic1, R.drawable.pic2, R.drawable.pic3, R.drawable.pic4, R.drawable.pic5};
     String[] wardenNames = {"Prof. Pankaj Srivastava", "Dr. Vishal Vyas", "Dr. Pinku Ranjan", "Dr. KK Pattanaik", "Dr. Arun Kumar", "Prof. Manisha Pattanaik"};
@@ -23,6 +25,9 @@ public class WardenListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_warden_list);
+
+        toolbar = (Toolbar)findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
 
         wardenListRecyclerView = (RecyclerView)findViewById(R.id.wardenListRecyclerView);
         manager = new LinearLayoutManager(this);

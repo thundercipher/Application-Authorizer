@@ -3,6 +3,7 @@ package com.tanay.thundercipher.leaveapplications;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -34,6 +35,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     DatabaseReference reference;
     StorageReference mStorageRef;
     FirebaseAuth auth;
+    Toolbar toolbar;
 
     String userID = "";
 
@@ -109,6 +111,9 @@ public class StudentProfileActivity extends AppCompatActivity {
         studentProfilePicImageView = (ImageView)findViewById(R.id.studentProfilePicImageView);
         studentProfilePhoneTextView = (TextView)findViewById(R.id.studentProfilePhoneTextView);
         studentProfileUpdatePhotoImageView = (ImageView)findViewById(R.id.studentProfileUpdatePhotoimageView);
+
+        toolbar = (Toolbar)findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
 
         Intent i = getIntent();
         auth = FirebaseAuth.getInstance();

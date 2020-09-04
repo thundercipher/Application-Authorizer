@@ -2,6 +2,7 @@ package com.tanay.thundercipher.leaveapplications;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class StudentProfileEditActivity extends AppCompatActivity {
     String studentProfileEditName = "", studentProfileEditRoll = "", studentProfileEditHostel = "", studentProfileEditPhone = "", userID = "";
     FirebaseDatabase database;
     FirebaseAuth auth;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,9 @@ public class StudentProfileEditActivity extends AppCompatActivity {
         studentProfileEditPhoneEditText = (EditText)findViewById(R.id.studentProfileEditPhoneEditText);
         studentProfileEditSaveButton = (Button)findViewById(R.id.studentProfileEditSaveButton);
         Intent intent = getIntent();
+
+        toolbar = (Toolbar)findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
 
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();

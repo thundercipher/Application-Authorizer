@@ -2,6 +2,7 @@ package com.tanay.thundercipher.leaveapplications;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class StudentApplicationStatusActivity extends AppCompatActivity {
     DatabaseReference reference;
     String userID = "";
     boolean wardenApproval, securityApproval;
+    Toolbar toolbar;
 
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
@@ -118,6 +120,9 @@ public class StudentApplicationStatusActivity extends AppCompatActivity {
         tellToDateStudentTextView = (TextView)findViewById(R.id.tellToDateStudentTextView);
         tellPurposeStudentTextView = (TextView)findViewById(R.id.tellPurposeStudentTextView);
         tellStatusStudentTextView = (TextView)findViewById(R.id.tellStatusStudentTextView);
+
+        toolbar = (Toolbar)findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
