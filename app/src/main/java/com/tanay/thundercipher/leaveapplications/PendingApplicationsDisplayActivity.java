@@ -1,5 +1,6 @@
 package com.tanay.thundercipher.leaveapplications;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -14,7 +15,7 @@ public class PendingApplicationsDisplayActivity extends AppCompatActivity {
     TextView tellNameTextView, tellRollNumberTextView, tellPlaceTextView, tellFromDateTextView, tellToDateTextView, tellPurposeTextView;
     Button approveButton, declineButton;
     String name = "", roll= "", fromDate= "", toDate = "", place = "", purpose = "", studentID = "", mode = "";
-    Toolbar toolbar;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,9 @@ public class PendingApplicationsDisplayActivity extends AppCompatActivity {
         tellPlaceTextView = (TextView)findViewById(R.id.tellPlaceTextView);
         tellPurposeTextView = (TextView)findViewById(R.id.tellPurposeTextView);
 
-        toolbar = (Toolbar)findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Application Authorizer");
 
         Intent i = getIntent();
         studentID = i.getStringExtra("Student ID");

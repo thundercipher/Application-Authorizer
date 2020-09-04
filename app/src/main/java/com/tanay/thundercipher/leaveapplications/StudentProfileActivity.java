@@ -2,6 +2,7 @@ package com.tanay.thundercipher.leaveapplications;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -35,7 +36,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     DatabaseReference reference;
     StorageReference mStorageRef;
     FirebaseAuth auth;
-    Toolbar toolbar;
+    ActionBar actionBar;
 
     String userID = "";
 
@@ -112,8 +113,9 @@ public class StudentProfileActivity extends AppCompatActivity {
         studentProfilePhoneTextView = (TextView)findViewById(R.id.studentProfilePhoneTextView);
         studentProfileUpdatePhotoImageView = (ImageView)findViewById(R.id.studentProfileUpdatePhotoimageView);
 
-        toolbar = (Toolbar)findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Application Authorizer");
 
         Intent i = getIntent();
         auth = FirebaseAuth.getInstance();

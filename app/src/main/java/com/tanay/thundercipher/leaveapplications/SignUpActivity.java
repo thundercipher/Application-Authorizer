@@ -1,6 +1,7 @@
 package com.tanay.thundercipher.leaveapplications;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -37,6 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button signUpButton;
     FirebaseAuth auth;
     FirebaseDatabase database;
+    ActionBar actionBar;
 
     public void signUpUser(final String name, final String email, String password, final String userType)
     {
@@ -95,6 +97,10 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Application Authorizer");
 
         usersListSpinner = (Spinner)findViewById(R.id.usersListSpinner);
         signUpEmailEditText = (EditText)findViewById(R.id.signUpEmailEditText);

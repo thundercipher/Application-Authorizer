@@ -1,6 +1,7 @@
 package com.tanay.thundercipher.leaveapplications;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -41,6 +42,7 @@ public class LogInActivity extends AppCompatActivity {
     String logInEmail, logInPassword;
     FirebaseDatabase database;
     String userType = "";
+    ActionBar actionBar;
 
     public void logInUser(String email, String password)
     {
@@ -118,6 +120,10 @@ public class LogInActivity extends AppCompatActivity {
        logInPasswordEditText = (EditText)findViewById(R.id.logInPasswordEditText);
        auth = FirebaseAuth.getInstance();
        database = FirebaseDatabase.getInstance();
+
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Application Authorizer");
 
        logInButton.setOnClickListener(new View.OnClickListener() {
            @Override

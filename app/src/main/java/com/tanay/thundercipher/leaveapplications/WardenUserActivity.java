@@ -29,11 +29,11 @@ import java.util.ArrayList;
 
 public class WardenUserActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     FirebaseAuth auth;
     FirebaseDatabase database;
+    ActionBar actionBar;
 
     ArrayList<String> pendingStudentID;
     ArrayList<String> pendingStudentName;
@@ -191,19 +191,11 @@ public class WardenUserActivity extends AppCompatActivity {
         query.addListenerForSingleValueEvent(valueEventListener);
 
         //code for the toolbar
-        toolbar = (Toolbar)findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Application Authorizer");
 
-        /*ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null)
-        {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        }
-
-
-        drawerLayout = (DrawerLayout)findViewById(R.id.wardenDrawerLayout);
+        /*drawerLayout = (DrawerLayout)findViewById(R.id.wardenDrawerLayout);
         navigationView = (NavigationView)findViewById(R.id.wardenNavigationView);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

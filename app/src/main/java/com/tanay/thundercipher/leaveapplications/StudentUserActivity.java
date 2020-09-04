@@ -41,12 +41,12 @@ import java.util.Locale;
 
 public class StudentUserActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     FirebaseAuth auth;
     FirebaseDatabase database;
     DatabaseReference reference;
+    ActionBar actionBar;
 
     static TextView fileApplicationFromDateTextView, fileApplicationToDateTextView;
     EditText fileApplicationPlaceEditText, fileApplicationPurposeEditText;
@@ -263,13 +263,10 @@ public class StudentUserActivity extends AppCompatActivity {
         });
 
         //toolbar and navigation drawer
-        toolbar = (Toolbar)findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionBar.setTitle("Application Authorizer");
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.studentDrawerLayout);
         navigationView = (NavigationView)findViewById(R.id.studentNavigationView);

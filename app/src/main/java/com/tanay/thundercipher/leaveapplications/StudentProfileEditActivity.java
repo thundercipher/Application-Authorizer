@@ -1,6 +1,7 @@
 package com.tanay.thundercipher.leaveapplications;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -27,7 +28,7 @@ public class StudentProfileEditActivity extends AppCompatActivity {
     String studentProfileEditName = "", studentProfileEditRoll = "", studentProfileEditHostel = "", studentProfileEditPhone = "", userID = "";
     FirebaseDatabase database;
     FirebaseAuth auth;
-    Toolbar toolbar;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +42,9 @@ public class StudentProfileEditActivity extends AppCompatActivity {
         studentProfileEditSaveButton = (Button)findViewById(R.id.studentProfileEditSaveButton);
         Intent intent = getIntent();
 
-        toolbar = (Toolbar)findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Application Authorizer");
 
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();

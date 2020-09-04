@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class SecurityUserActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
+    ActionBar actionBar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     FirebaseAuth auth;
@@ -192,18 +192,11 @@ public class SecurityUserActivity extends AppCompatActivity {
 
 
         //code for the toolbar
-        toolbar = (Toolbar)findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Application Authorizer");
 
-        /*ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null)
-        {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        }
-
-        drawerLayout = (DrawerLayout)findViewById(R.id.securityDrawerLayout);
+        /*drawerLayout = (DrawerLayout)findViewById(R.id.securityDrawerLayout);
         navigationView = (NavigationView)findViewById(R.id.securityNavigationView);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

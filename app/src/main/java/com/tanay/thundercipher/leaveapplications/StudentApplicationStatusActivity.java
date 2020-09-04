@@ -1,6 +1,7 @@
 package com.tanay.thundercipher.leaveapplications;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -26,7 +27,7 @@ public class StudentApplicationStatusActivity extends AppCompatActivity {
     DatabaseReference reference;
     String userID = "";
     boolean wardenApproval, securityApproval;
-    Toolbar toolbar;
+    ActionBar actionBar;
 
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
@@ -121,8 +122,9 @@ public class StudentApplicationStatusActivity extends AppCompatActivity {
         tellPurposeStudentTextView = (TextView)findViewById(R.id.tellPurposeStudentTextView);
         tellStatusStudentTextView = (TextView)findViewById(R.id.tellStatusStudentTextView);
 
-        toolbar = (Toolbar)findViewById(R.id.toolBar);
-        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Application Authorizer");
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
