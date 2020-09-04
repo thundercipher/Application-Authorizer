@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     String userID = "", userType = "";
     ActionBar actionBar;
+    LoadingDialog dialog;
 
     private void clickedButton(String url)
     {
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onStart();
 
+        dialog = new LoadingDialog(MainActivity.this);
+        dialog.startLoadingDialog();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null)
@@ -78,28 +81,41 @@ public class MainActivity extends AppCompatActivity {
 
                     if(userType.equals("Student"))
                     {
+                        dialog.dismissDialog();
+
                         Intent i = new Intent(getApplicationContext(), StudentUserActivity.class);
                         startActivity(i);
                     }
 
                     else if(userType.equals("Warden"))
                     {
+                        dialog.dismissDialog();
+
                         Intent i = new Intent(getApplicationContext(), WardenUserActivity.class);
                         startActivity(i);
                     }
 
                     else if(userType.equals("Security Official"))
                     {
+                        dialog.dismissDialog();
+
                         Intent i = new Intent(getApplicationContext(), SecurityUserActivity.class);
                         startActivity(i);
                     }
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
+                public void onCancelled(@NonNull DatabaseError error)
+                {
+                    dialog.dismissDialog();
+                    Toast.makeText(getApplicationContext(), "Couldn't load data, log in again!", Toast.LENGTH_LONG).show();
                 }
             });
+        }
+
+        else
+        {
+            dialog.dismissDialog();
         }
     }
 

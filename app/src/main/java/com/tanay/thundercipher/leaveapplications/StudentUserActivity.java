@@ -47,6 +47,7 @@ public class StudentUserActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     ActionBar actionBar;
+    LoadingDialog dialog;
 
     static TextView fileApplicationFromDateTextView, fileApplicationToDateTextView;
     EditText fileApplicationPlaceEditText, fileApplicationPurposeEditText;
@@ -54,15 +55,15 @@ public class StudentUserActivity extends AppCompatActivity {
 
     static String fileApplicationFromDate, fileApplicationToDate;
     String fileApplicationName = "", fileApplicationRoll = "", userID = "", checkDate = "", currentDate = "";
-    int counter = 0;
 
     public void fileApplication(String applicationName, String applicationRoll,
                                 String applicationFrom, String applicationTo,
                                 String applicationPlace, String applicationPurpose, String studentID,
                                 boolean wardenApproval, boolean securityApproval)
     {
+        dialog.startLoadingDialog();
+
         //code to file the application
-        counter++;
         HashMap<String, Object> applicationData = new HashMap<>();
         applicationData.put("Name", applicationName);
         applicationData.put("Roll Number", applicationRoll);
@@ -76,6 +77,7 @@ public class StudentUserActivity extends AppCompatActivity {
 
         database.getReference().child("Users").child(userID).child("Application").updateChildren(applicationData);
 
+        dialog.dismissDialog();
         Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
         startActivity(i);
     }
@@ -85,6 +87,8 @@ public class StudentUserActivity extends AppCompatActivity {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot)
         {
+            dialog.startLoadingDialog();
+
             if(snapshot.getKey().equals("To Date"))
             {
                 checkDate = snapshot.getValue().toString();
@@ -92,6 +96,7 @@ public class StudentUserActivity extends AppCompatActivity {
                 //code to compare dates and navigate to StudentApplicationStatusActivity if necessary
                 if (currentDate.compareTo(checkDate) <= 0)
                 {
+                    dialog.dismissDialog();
                     Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
                     startActivity(i);
                 }
@@ -99,7 +104,8 @@ public class StudentUserActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onCancelled(@NonNull DatabaseError error) {
+        public void onCancelled(@NonNull DatabaseError error)
+        {
 
         }
     };
@@ -191,6 +197,7 @@ public class StudentUserActivity extends AppCompatActivity {
         fileApplicationButton = (Button)findViewById(R.id.fileApplicationButton);
         fileApplicationFromDateButton = (Button)findViewById(R.id.fileApplicationFromDateButton);
         fileApplicationToDateButton = (Button)findViewById(R.id.fileApplicationToDateButton);
+        dialog = new LoadingDialog(StudentUserActivity.this);
 
         currentDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
         auth = FirebaseAuth.getInstance();

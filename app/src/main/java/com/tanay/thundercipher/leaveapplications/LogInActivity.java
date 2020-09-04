@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -43,6 +44,7 @@ public class LogInActivity extends AppCompatActivity {
     FirebaseDatabase database;
     String userType = "";
     ActionBar actionBar;
+    LoadingDialog dialog;
 
     public void logInUser(String email, String password)
     {
@@ -52,7 +54,8 @@ public class LogInActivity extends AppCompatActivity {
             public void onSuccess(AuthResult authResult)
             {
 
-                Toast.makeText(LogInActivity.this, "LogIn Successful!", Toast.LENGTH_SHORT).show();
+                dialog = new LoadingDialog(LogInActivity.this);
+                dialog.startLoadingDialog();
 
                 FirebaseUser user = auth.getCurrentUser();
                 DatabaseReference reference;
@@ -81,16 +84,22 @@ public class LogInActivity extends AppCompatActivity {
                                     switch (userType)
                                     {
                                         case "Student":
+                                            dialog.dismissDialog();
+                                            Toast.makeText(LogInActivity.this, "LogIn Successful!", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(LogInActivity.this, StudentUserActivity.class));
                                             finish();
                                             break;
 
                                         case "Warden":
+                                            dialog.dismissDialog();
+                                            Toast.makeText(LogInActivity.this, "LogIn Successful!", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(LogInActivity.this, WardenUserActivity.class));
                                             finish();
                                             break;
 
                                         case "Security Official":
+                                            dialog.dismissDialog();
+                                            Toast.makeText(LogInActivity.this, "LogIn Successful!", Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(LogInActivity.this, SecurityUserActivity.class));
                                             finish();
                                             break;
@@ -102,10 +111,17 @@ public class LogInActivity extends AppCompatActivity {
                         @Override
                         public void onCancelled(@NonNull DatabaseError error)
                         {
+                            dialog.dismissDialog();
                             Toast.makeText(LogInActivity.this, "Couldn't load user information! Try again", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e)
+            {
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

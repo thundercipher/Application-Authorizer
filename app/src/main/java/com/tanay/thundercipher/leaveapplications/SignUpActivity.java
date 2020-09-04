@@ -36,16 +36,22 @@ public class SignUpActivity extends AppCompatActivity {
     String signUpMethod = "", signUpEmail = "", signUpPassword = "", signUpName = "", userID = "";
     EditText signUpEmailEditText, signUpPasswordEditText, signUpNameEditText;
     Button signUpButton;
+
     FirebaseAuth auth;
     FirebaseDatabase database;
     ActionBar actionBar;
+    LoadingDialog dialog;
 
     public void signUpUser(final String name, final String email, String password, final String userType)
     {
+        dialog = new LoadingDialog(SignUpActivity.this);
+
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task)
             {
+                dialog.startLoadingDialog();
+
                 if(task.isSuccessful())
                 {
                     if(auth.getCurrentUser() != null)
@@ -62,6 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
 
+                            dialog.dismissDialog();
                             Toast.makeText(SignUpActivity.this, "User registered!", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -87,6 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 else
                 {
+                    dialog.dismissDialog();
                     Toast.makeText(SignUpActivity.this, "Unsuccessful! Try again", Toast.LENGTH_LONG).show();
                 }
             }
