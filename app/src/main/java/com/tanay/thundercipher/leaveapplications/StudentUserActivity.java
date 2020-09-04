@@ -267,12 +267,9 @@ public class StudentUserActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null)
-        {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
-        }
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        actionBar.setTitle("Application Authorizer");
 
         drawerLayout = (DrawerLayout)findViewById(R.id.studentDrawerLayout);
         navigationView = (NavigationView)findViewById(R.id.studentNavigationView);
