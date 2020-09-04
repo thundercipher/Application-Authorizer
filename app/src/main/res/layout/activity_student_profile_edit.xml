@@ -87,7 +87,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:background="@drawable/button_background"
+        android:background="@drawable/button_background_red"
         android:text="SAVE CHANGES"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
