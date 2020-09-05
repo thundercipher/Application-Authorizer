@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".StudentApplicationStatusActivity" />
+        <activity
+            android:name=".StudentApplicationStatusActivity"
+            android:parentActivityName=".StudentUserActivity"/>
+
         <activity android:name=".PendingApplicationsDisplayActivity" />
 
         <activity

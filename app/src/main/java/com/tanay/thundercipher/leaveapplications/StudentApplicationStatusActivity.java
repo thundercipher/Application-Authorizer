@@ -161,7 +161,6 @@ public class StudentApplicationStatusActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
         actionBar.setTitle("Application Status");
 
-
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
