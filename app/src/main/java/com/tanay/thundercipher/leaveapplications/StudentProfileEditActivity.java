@@ -29,6 +29,7 @@ public class StudentProfileEditActivity extends AppCompatActivity {
     FirebaseDatabase database;
     FirebaseAuth auth;
     ActionBar actionBar;
+    LoadingDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +49,16 @@ public class StudentProfileEditActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         userID = auth.getCurrentUser().getUid();
+        dialog = new LoadingDialog(StudentProfileEditActivity.this);
 
         studentProfileEditSaveButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+
+                dialog.startLoadingDialog();
+
                 studentProfileEditName = studentProfileEditNameEditText.getText().toString();
                 studentProfileEditRoll = studentProfileEditRollNumberEditText.getText().toString();
                 studentProfileEditHostel = studentProfileEditHostelEditText.getText().toString();
@@ -72,6 +77,8 @@ public class StudentProfileEditActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid)
                             {
+
+                                dialog.dismissDialog();
                                 Toast.makeText(getApplicationContext(), "Updated!", Toast.LENGTH_SHORT).show();
 
                                 Intent i = new Intent(getApplicationContext(), StudentProfileActivity.class);
@@ -84,6 +91,8 @@ public class StudentProfileEditActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e)
                             {
+
+                                dialog.dismissDialog();
                                 Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
                             }
                         });

@@ -32,11 +32,13 @@ public class StudentProfileActivity extends AppCompatActivity {
 
     TextView studentProfileNameTextView, studentProfileRollNumberTextView, studentProfileHostelTextView, studentProfilePhoneTextView;
     ImageView studentProfilePicImageView, studentProfileUpdatePhotoImageView;
+
     FirebaseDatabase database;
     DatabaseReference reference;
     StorageReference mStorageRef;
     FirebaseAuth auth;
     ActionBar actionBar;
+    LoadingDialog dialog;
 
     String userID = "";
 
@@ -81,11 +83,14 @@ public class StudentProfileActivity extends AppCompatActivity {
                         //Uri downloadUrl = taskSnapshot.getDownloadUrl();
                         //imageView.setImageURI(imageUri);
 
+                        dialog.startLoadingDialog();
+
                         photoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri)
                             {
                                 Picasso.get().load(uri).into(studentProfilePicImageView);
+                                dialog.dismissDialog();
                                 Snackbar.make(findViewById(android.R.id.content), "Upload Successful!", Snackbar.LENGTH_LONG).show();
                             }
                         });
@@ -96,6 +101,8 @@ public class StudentProfileActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception exception)
                     {
+
+                        dialog.dismissDialog();
                         Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
@@ -121,6 +128,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
         userID = auth.getCurrentUser().getUid();
+        dialog = new LoadingDialog(StudentProfileActivity.this);
 
         reference = database.getReference().child("Users").child(userID);
         //will the valueEventListener work to initially get the student's name to be displayed (before editing) ?
@@ -130,6 +138,8 @@ public class StudentProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
+                dialog.startLoadingDialog();
+
                 for(DataSnapshot snap : snapshot.getChildren())
                 {
                     if(snap.getKey().equals("Name"))
@@ -156,6 +166,8 @@ public class StudentProfileActivity extends AppCompatActivity {
                         //Log.i("Phone Number", snap.getValue().toString());
                     }
                 }
+
+                dialog.dismissDialog();
             }
 
             @Override
@@ -170,7 +182,10 @@ public class StudentProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Uri uri)
             {
+
+                dialog.startLoadingDialog();
                 Picasso.get().load(uri).into(studentProfilePicImageView);
+                dialog.dismissDialog();
             }
         });
 
