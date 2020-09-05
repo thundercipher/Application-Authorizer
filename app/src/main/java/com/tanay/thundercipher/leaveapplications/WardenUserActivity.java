@@ -178,7 +178,7 @@ public class WardenUserActivity extends AppCompatActivity {
         wardenPendingApplicationsRecyclerViewManager = new LinearLayoutManager(this);
         wardenPendingApplicationsRecyclerView.setLayoutManager(wardenPendingApplicationsRecyclerViewManager);
 
-        //add code to store application data in arrayList and then, after notifyDataSetChanged() , write the following code inside the valueEventListener's onSuccess itself:
+        //add code to store application data in arrayList and then, after notifyDataSetChanged(), write the following code inside the valueEventListener's onSuccess itself:
         wardenPendingApplicationsAdapter = new PendingApplicationsRecyclerAdapter(pendingStudentID, pendingStudentName,
                                                                                   pendingStudentRoll, pendingFromDate,
                                                                                   pendingToDate, pendingPlace, pendingPurpose, reviewMode, this);
