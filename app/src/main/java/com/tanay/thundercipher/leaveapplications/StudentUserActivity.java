@@ -53,7 +53,7 @@ public class StudentUserActivity extends AppCompatActivity {
 
     static TextView fileApplicationFromDateTextView, fileApplicationToDateTextView;
     EditText fileApplicationPlaceEditText, fileApplicationPurposeEditText;
-    Button fileApplicationButton, fileApplicationFromDateButton, fileApplicationToDateButton;
+    Button fileApplicationButton, fileApplicationFromDateButton, fileApplicationToDateButton, viewApplicationStatusButton;
 
     static String fileApplicationFromDate, fileApplicationToDate;
     String fileApplicationName = "", fileApplicationRoll = "", userID = "", checkDate = "", currentDate = "";
@@ -80,10 +80,10 @@ public class StudentUserActivity extends AppCompatActivity {
             public void onSuccess(Void aVoid)
             {
                 Toast.makeText(getApplicationContext(), "Application filed successfully!", Toast.LENGTH_LONG).show();
-
                 Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
                 startActivity(i);
             }
+
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -91,11 +91,9 @@ public class StudentUserActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Failed, try again!", Toast.LENGTH_LONG).show();
             }
         });
-
-
     }
 
-    ValueEventListener valueEventListenerForStatusNavigation = new ValueEventListener()
+    /*ValueEventListener valueEventListenerForStatusNavigation = new ValueEventListener()
     {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot)
@@ -119,6 +117,7 @@ public class StudentUserActivity extends AppCompatActivity {
 
         }
     };
+    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -196,19 +195,6 @@ public class StudentUserActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart()
-    {
-        super.onStart();
-
-        FirebaseUser user = auth.getCurrentUser();
-
-        if(user != null)
-        {
-            database.getReference().child("Users").child(user.getUid()).child("Application").addListenerForSingleValueEvent(valueEventListenerForStatusNavigation);
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_user);
@@ -220,6 +206,7 @@ public class StudentUserActivity extends AppCompatActivity {
         fileApplicationButton = (Button)findViewById(R.id.fileApplicationButton);
         fileApplicationFromDateButton = (Button)findViewById(R.id.fileApplicationFromDateButton);
         fileApplicationToDateButton = (Button)findViewById(R.id.fileApplicationToDateButton);
+        viewApplicationStatusButton = (Button)findViewById(R.id.viewApplicationStatusButton);
 
         currentDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
         auth = FirebaseAuth.getInstance();
@@ -283,6 +270,15 @@ public class StudentUserActivity extends AppCompatActivity {
                         fileApplicationPlaceEditText.getText().toString(),
                         fileApplicationPurposeEditText.getText().toString(),
                         userID, false, false);
+            }
+        });
+
+        viewApplicationStatusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
+                startActivity(i);
             }
         });
 
