@@ -22,6 +22,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -73,10 +75,24 @@ public class StudentUserActivity extends AppCompatActivity {
         applicationData.put("Warden Approval", wardenApproval);
         applicationData.put("Security Approval", securityApproval);
 
-        database.getReference().child("Users").child(userID).child("Application").updateChildren(applicationData);
+        database.getReference().child("Users").child(userID).child("Application").updateChildren(applicationData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
 
-        Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
-        startActivity(i);
+                Toast.makeText(getApplicationContext(), "Application filed successfully!", Toast.LENGTH_LONG).show();
+
+                Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
+                startActivity(i);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(getApplicationContext(), "Failed, try again!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
     }
 
     ValueEventListener valueEventListenerForStatusNavigation = new ValueEventListener()
