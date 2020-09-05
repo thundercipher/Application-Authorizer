@@ -1,5 +1,6 @@
 package com.tanay.thundercipher.leaveapplications;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,12 +11,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+
 public class PendingApplicationsDisplayActivity extends AppCompatActivity {
 
     TextView tellNameTextView, tellRollNumberTextView, tellPlaceTextView, tellFromDateTextView, tellToDateTextView, tellPurposeTextView;
     Button approveButton, declineButton;
+
     String name = "", roll= "", fromDate= "", toDate = "", place = "", purpose = "", studentID = "", mode = "";
+    FirebaseDatabase database;
+    DatabaseReference reference;
     ActionBar actionBar;
+    LoadingDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +50,89 @@ public class PendingApplicationsDisplayActivity extends AppCompatActivity {
         Intent i = getIntent();
         studentID = i.getStringExtra("Student ID");
         mode = i.getStringExtra("Review Mode");
+        database = FirebaseDatabase.getInstance();
+        final HashMap<String, Object> applicationData = new HashMap<>();
+        dialog = new LoadingDialog(PendingApplicationsDisplayActivity.this);
 
         //write code to fetch info from the studentID and display it in the textViews
+        reference = database.getReference().child("Users").child(studentID).child("Application");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot)
+            {
+                dialog.startLoadingDialog();
+
+                for(DataSnapshot snap : snapshot.getChildren())
+                {
+                    if(snap.getKey().equals("Name"))
+                    {
+                        tellNameTextView.setText(snap.getValue().toString());
+                    }
+
+                    else if(snap.getKey().equals("Roll Number"))
+                    {
+                        tellRollNumberTextView.setText(snap.getValue().toString());
+                    }
+
+                    else if(snap.getKey().equals("From Date"))
+                    {
+                        tellFromDateTextView.setText(snap.getValue().toString());
+                    }
+
+                    else if(snap.getKey().equals("To Date"))
+                    {
+                        tellToDateTextView.setText(snap.getValue().toString());
+                    }
+
+                    else if(snap.getKey().equals("Place"))
+                    {
+                        tellPlaceTextView.setText(snap.getValue().toString());
+                    }
+
+                    else if(snap.getKey().equals("Purpose"))
+                    {
+                        tellPurposeTextView.setText(snap.getValue().toString());
+                    }
+                }
+
+                dialog.dismissDialog();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error)
+            {
+
+            }
+        });
+
 
         approveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                //write code to approve the application and notify the student about it (i.e. change the value of the bool variable to true)
+                //code to approve the application and notify the student about it (i.e. change the value of the bool variable to true)
                 if(mode.equals("Warden"))
                 {
                     //code
+                    applicationData.clear();
+                    applicationData.put("Warden Approval", "true");
+                    reference = database.getReference().child("Users").child(studentID).child("Application");
+                    reference.updateChildren(applicationData);
+
+                    Intent intent = new Intent(getApplicationContext(), WardenUserActivity.class);
+                    startActivity(intent);
                 }
 
                 else if(mode.equals("Security"))
                 {
                     //code
+                    applicationData.clear();
+                    applicationData.put("Security Approval", "true");
+                    reference = database.getReference().child("Users").child(studentID).child("Application");
+                    reference.updateChildren(applicationData);
+
+                    Intent intent = new Intent(getApplicationContext(), SecurityUserActivity.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -65,11 +145,15 @@ public class PendingApplicationsDisplayActivity extends AppCompatActivity {
                 if(mode.equals("Warden"))
                 {
                     //code
+                    Intent intent = new Intent(getApplicationContext(), SecurityUserActivity.class);
+                    startActivity(intent);
                 }
 
                 else if(mode.equals("Security"))
                 {
                     //code
+                    Intent intent = new Intent(getApplicationContext(), SecurityUserActivity.class);
+                    startActivity(intent);
                 }
             }
         });
