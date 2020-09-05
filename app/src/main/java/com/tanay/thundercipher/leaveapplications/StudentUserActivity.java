@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,7 +48,6 @@ public class StudentUserActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference;
     ActionBar actionBar;
-    LoadingDialog dialog;
 
     static TextView fileApplicationFromDateTextView, fileApplicationToDateTextView;
     EditText fileApplicationPlaceEditText, fileApplicationPurposeEditText;
@@ -61,8 +61,6 @@ public class StudentUserActivity extends AppCompatActivity {
                                 String applicationPlace, String applicationPurpose, String studentID,
                                 boolean wardenApproval, boolean securityApproval)
     {
-        dialog.startLoadingDialog();
-
         //code to file the application
         HashMap<String, Object> applicationData = new HashMap<>();
         applicationData.put("Name", applicationName);
@@ -77,7 +75,6 @@ public class StudentUserActivity extends AppCompatActivity {
 
         database.getReference().child("Users").child(userID).child("Application").updateChildren(applicationData);
 
-        dialog.dismissDialog();
         Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
         startActivity(i);
     }
@@ -87,8 +84,6 @@ public class StudentUserActivity extends AppCompatActivity {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot)
         {
-            dialog.startLoadingDialog();
-
             if(snapshot.getKey().equals("To Date"))
             {
                 checkDate = snapshot.getValue().toString();
@@ -96,7 +91,6 @@ public class StudentUserActivity extends AppCompatActivity {
                 //code to compare dates and navigate to StudentApplicationStatusActivity if necessary
                 if (currentDate.compareTo(checkDate) <= 0)
                 {
-                    dialog.dismissDialog();
                     Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
                     startActivity(i);
                 }
@@ -186,6 +180,19 @@ public class StudentUserActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        if(user != null)
+        {
+            database.getReference().child("Users").child(user.getUid()).child("Application").addListenerForSingleValueEvent(valueEventListenerForStatusNavigation);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_user);
@@ -197,7 +204,6 @@ public class StudentUserActivity extends AppCompatActivity {
         fileApplicationButton = (Button)findViewById(R.id.fileApplicationButton);
         fileApplicationFromDateButton = (Button)findViewById(R.id.fileApplicationFromDateButton);
         fileApplicationToDateButton = (Button)findViewById(R.id.fileApplicationToDateButton);
-        dialog = new LoadingDialog(StudentUserActivity.this);
 
         currentDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
         auth = FirebaseAuth.getInstance();
@@ -220,11 +226,6 @@ public class StudentUserActivity extends AppCompatActivity {
                     else if(snap.getKey().equals("Roll Number"))
                     {
                         fileApplicationRoll = snap.getValue().toString();
-                    }
-
-                    else if(snap.getKey().equals("Application"))
-                    {
-                        database.getReference().child("Users").child(userID).child("Application").addListenerForSingleValueEvent(valueEventListenerForStatusNavigation);
                     }
                 }
             }
