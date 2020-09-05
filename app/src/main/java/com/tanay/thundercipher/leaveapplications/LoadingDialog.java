@@ -22,7 +22,7 @@ public class LoadingDialog
         builder.setView(inflater.inflate(R.layout.loading_dialog_layout, null));
 
         //upon clicking anywhere else on the screen, the dialog closes if the parameter below is true
-        builder.setCancelable(false);
+        builder.setCancelable(true);
 
         alertDialog = builder.create();
         alertDialog.show();
