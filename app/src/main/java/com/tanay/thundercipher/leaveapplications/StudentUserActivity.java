@@ -77,8 +77,8 @@ public class StudentUserActivity extends AppCompatActivity {
 
         database.getReference().child("Users").child(userID).child("Application").updateChildren(applicationData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(Void aVoid) {
-
+            public void onSuccess(Void aVoid)
+            {
                 Toast.makeText(getApplicationContext(), "Application filed successfully!", Toast.LENGTH_LONG).show();
 
                 Intent i = new Intent(getApplicationContext(), StudentApplicationStatusActivity.class);
