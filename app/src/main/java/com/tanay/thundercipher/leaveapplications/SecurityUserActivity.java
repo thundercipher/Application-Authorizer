@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +26,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import static android.widget.LinearLayout.HORIZONTAL;
+import static android.widget.LinearLayout.VERTICAL;
 
 public class SecurityUserActivity extends AppCompatActivity {
 
@@ -182,6 +186,8 @@ public class SecurityUserActivity extends AppCompatActivity {
                                                                                     pendingToDate, pendingPlace, pendingPurpose,
                                                                                     reviewMode, this);
         //setHasFixedSize() would be false here
+        DividerItemDecoration itemDecor = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.HORIZONTAL);
+        securityPendingApplicationsRecyclerView.addItemDecoration(itemDecor);
         securityPendingApplicationsRecyclerView.setAdapter(securityPendingApplicationsAdapter);
 
         //code for the query

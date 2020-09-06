@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +27,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import static android.widget.LinearLayout.HORIZONTAL;
 
 public class WardenUserActivity extends AppCompatActivity {
 
@@ -183,6 +186,8 @@ public class WardenUserActivity extends AppCompatActivity {
                                                                                   pendingStudentRoll, pendingFromDate,
                                                                                   pendingToDate, pendingPlace, pendingPurpose, reviewMode, this);
         //setHasFixedSize() would be false here
+        DividerItemDecoration itemDecor = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.HORIZONTAL);
+        wardenPendingApplicationsRecyclerView.addItemDecoration(itemDecor);
         wardenPendingApplicationsRecyclerView.setAdapter(wardenPendingApplicationsAdapter);
 
         //code for the query
