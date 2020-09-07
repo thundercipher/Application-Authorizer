@@ -110,39 +110,48 @@ public class SecurityUserActivity extends AppCompatActivity {
                     {
                         for(DataSnapshot applicationSnap : userInfoSnap.getChildren())
                         {
-                            if(applicationSnap.getKey().equals("Student ID"))
+                            if(applicationSnap.getKey().equals("Security Approval"))
                             {
-                                pendingStudentID.add(applicationSnap.getValue().toString());
-                            }
+                                if(applicationSnap.getValue().toString().equals("false"))
+                                {
+                                    for(DataSnapshot applicationSnap1 : userInfoSnap.getChildren())
+                                    {
+                                        if(applicationSnap.getKey().equals("Student ID"))
+                                        {
+                                            pendingStudentID.add(applicationSnap.getValue().toString());
+                                        }
 
-                            else if(applicationSnap.getKey().equals("Name"))
-                            {
-                                pendingStudentName.add(applicationSnap.getValue().toString());
-                            }
+                                        else if(applicationSnap.getKey().equals("Name"))
+                                        {
+                                            pendingStudentName.add(applicationSnap.getValue().toString());
+                                        }
 
-                            else if(applicationSnap.getKey().equals("Roll Number"))
-                            {
-                                pendingStudentRoll.add(applicationSnap.getValue().toString());
-                            }
+                                        else if(applicationSnap.getKey().equals("Roll Number"))
+                                        {
+                                            pendingStudentRoll.add(applicationSnap.getValue().toString());
+                                        }
 
-                            else if(applicationSnap.getKey().equals("From Date"))
-                            {
-                                pendingFromDate.add(applicationSnap.getValue().toString());
-                            }
+                                        else if(applicationSnap.getKey().equals("From Date"))
+                                        {
+                                            pendingFromDate.add(applicationSnap.getValue().toString());
+                                        }
 
-                            else if(applicationSnap.getKey().equals("To Date"))
-                            {
-                                pendingToDate.add(applicationSnap.getValue().toString());
-                            }
+                                        else if(applicationSnap.getKey().equals("To Date"))
+                                        {
+                                            pendingToDate.add(applicationSnap.getValue().toString());
+                                        }
 
-                            else if(applicationSnap.getKey().equals("Place"))
-                            {
-                                pendingPlace.add(applicationSnap.getValue().toString());
-                            }
+                                        else if(applicationSnap.getKey().equals("Place"))
+                                        {
+                                            pendingPlace.add(applicationSnap.getValue().toString());
+                                        }
 
-                            else if(applicationSnap.getKey().equals("Purpose"))
-                            {
-                                pendingPurpose.add(applicationSnap.getValue().toString());
+                                        else if(applicationSnap.getKey().equals("Purpose"))
+                                        {
+                                            pendingPurpose.add(applicationSnap.getValue().toString());
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -191,11 +200,12 @@ public class SecurityUserActivity extends AppCompatActivity {
         securityPendingApplicationsRecyclerView.setAdapter(securityPendingApplicationsAdapter);
 
         //code for the query
-        database.getReference("Users").addListenerForSingleValueEvent(valueEventListener);
-        Query query = database.getReference("Users");
+        /*Query query = database.getReference("Users");
         query.orderByChild("Security Approval").equalTo("false");
         query.addListenerForSingleValueEvent(valueEventListener);
+        */
 
+        database.getReference().child("Users").addListenerForSingleValueEvent(valueEventListener);
 
         //code for the toolbar
         actionBar = getSupportActionBar();

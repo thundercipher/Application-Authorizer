@@ -17,9 +17,10 @@
         <TextView
             android:id="@+id/securityUserActivityTitleTextView"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="?attr/actionBarSize"
             android:gravity="center_horizontal|center_vertical"
-            android:text="Pending Applications"
+            android:text="PENDING APPLICATIONS"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,7 @@
             android:id="@+id/securityPendingApplicationsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="57dp"
             android:scrollbars="vertical" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

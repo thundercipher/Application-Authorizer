@@ -44,7 +44,7 @@ public class WardenRecyclerAdapter extends RecyclerView.Adapter<WardenRecyclerAd
 
         holder.profilePhotoImageView.setImageResource(imageIndex);
         holder.nameTextView.setText(nameIndex);
-        holder.designationTextView.setText(desigIndex);
+        holder.designationTextView.setText("(" + desigIndex + ")");
         holder.mailTextView.setText(mailIndex);
         holder.callTextView.setText(phoneIndex);
     }
