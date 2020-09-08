@@ -256,7 +256,7 @@ public class WardenUserActivity extends AppCompatActivity {
 
         //code for the toolbar
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Application Authorizer");
+        actionBar.setTitle("Pending Applications");
 
         /*drawerLayout = (DrawerLayout)findViewById(R.id.wardenDrawerLayout);
         navigationView = (NavigationView)findViewById(R.id.wardenNavigationView);

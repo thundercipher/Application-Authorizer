@@ -256,7 +256,7 @@ public class SecurityUserActivity extends AppCompatActivity {
 
         //code for the toolbar
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Application Authorizer");
+        actionBar.setTitle("Pending Applications");
 
         /*drawerLayout = (DrawerLayout)findViewById(R.id.securityDrawerLayout);
         navigationView = (NavigationView)findViewById(R.id.securityNavigationView);
