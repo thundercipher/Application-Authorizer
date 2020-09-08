@@ -110,6 +110,53 @@ public class SecurityUserActivity extends AppCompatActivity {
                     {
                         for(DataSnapshot applicationSnap : userInfoSnap.getChildren())
                         {
+                            if(applicationSnap.getKey().equals("Student ID"))
+                            {
+                                pendingStudentID.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Name"))
+                            {
+                                pendingStudentName.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Roll Number"))
+                            {
+                                pendingStudentRoll.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("From Date"))
+                            {
+                                pendingFromDate.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("To Date"))
+                            {
+                                pendingToDate.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Place"))
+                            {
+                                pendingPlace.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Purpose"))
+                            {
+                                pendingPurpose.add(applicationSnap.getValue().toString());
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*for(DataSnapshot uidSnap : snapshot.getChildren())
+            {
+                for(DataSnapshot userInfoSnap : uidSnap.getChildren())
+                {
+                    if(userInfoSnap.getKey().equals("Application"))
+                    {
+                        for(DataSnapshot applicationSnap : userInfoSnap.getChildren())
+                        {
                             if(applicationSnap.getKey().equals("Security Approval"))
                             {
                                 if(applicationSnap.getValue().toString().equals("false"))
@@ -157,6 +204,7 @@ public class SecurityUserActivity extends AppCompatActivity {
                     }
                 }
             }
+            */
 
             securityPendingApplicationsAdapter.notifyDataSetChanged();
             Toast.makeText(getApplicationContext(), "Data updated!", Toast.LENGTH_LONG).show();
@@ -200,12 +248,11 @@ public class SecurityUserActivity extends AppCompatActivity {
         securityPendingApplicationsRecyclerView.setAdapter(securityPendingApplicationsAdapter);
 
         //code for the query
-        /*Query query = database.getReference("Users");
+        Query query = database.getReference("Users");
         query.orderByChild("Security Approval").equalTo("false");
         query.addListenerForSingleValueEvent(valueEventListener);
-        */
 
-        database.getReference().child("Users").addListenerForSingleValueEvent(valueEventListener);
+        //database.getReference().child("Users").addListenerForSingleValueEvent(valueEventListener);
 
         //code for the toolbar
         actionBar = getSupportActionBar();

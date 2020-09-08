@@ -102,64 +102,6 @@ public class WardenUserActivity extends AppCompatActivity {
             pendingPlace.clear();
             pendingPurpose.clear();
 
-            /*for(DataSnapshot uidSnap: snapshot.getChildren())
-            {
-                for(DataSnapshot userInfoSnap : uidSnap.getChildren())
-                {
-                    if(userInfoSnap.getKey().equals("Application"))
-                    {
-                        for(DataSnapshot applicationSnap : userInfoSnap.getChildren())
-                        {
-                            if(applicationSnap.getKey().equals("Warden Approval"))
-                            {
-                                if(applicationSnap.getValue().toString().equals("false"))
-                                {
-                                    for(DataSnapshot applicationSnap1 : userInfoSnap.getChildren())
-                                    {
-                                        //code
-                                        if(applicationSnap.getKey().equals("Student ID"))
-                                        {
-                                            pendingStudentID.add(applicationSnap.getValue().toString());
-                                        }
-
-                                        else if(applicationSnap.getKey().equals("Name"))
-                                        {
-                                            pendingStudentName.add(applicationSnap.getValue().toString());
-                                        }
-
-                                        else if(applicationSnap.getKey().equals("Roll Number"))
-                                        {
-                                            pendingStudentRoll.add(applicationSnap.getValue().toString());
-                                        }
-
-                                        else if(applicationSnap.getKey().equals("From Date"))
-                                        {
-                                            pendingFromDate.add(applicationSnap.getValue().toString());
-                                        }
-
-                                        else if(applicationSnap.getKey().equals("To Date"))
-                                        {
-                                            pendingToDate.add(applicationSnap.getValue().toString());
-                                        }
-
-                                        else if(applicationSnap.getKey().equals("Place"))
-                                        {
-                                            pendingPlace.add(applicationSnap.getValue().toString());
-                                        }
-
-                                        else if(applicationSnap.getKey().equals("Purpose"))
-                                        {
-                                            pendingPurpose.add(applicationSnap.getValue().toString());
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            */
-
             for(DataSnapshot uidSnap : snapshot.getChildren())
             {
                 for(DataSnapshot userInfoSnap : uidSnap.getChildren())
@@ -168,6 +110,53 @@ public class WardenUserActivity extends AppCompatActivity {
                     {
                         for(DataSnapshot applicationSnap : userInfoSnap.getChildren())
                         {
+                            if(applicationSnap.getKey().equals("Student ID"))
+                            {
+                                pendingStudentID.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Name"))
+                            {
+                                pendingStudentName.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Roll Number"))
+                            {
+                                pendingStudentRoll.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("From Date"))
+                            {
+                                pendingFromDate.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("To Date"))
+                            {
+                                pendingToDate.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Place"))
+                            {
+                                pendingPlace.add(applicationSnap.getValue().toString());
+                            }
+
+                            else if(applicationSnap.getKey().equals("Purpose"))
+                            {
+                                pendingPurpose.add(applicationSnap.getValue().toString());
+                            }
+                        }
+                    }
+                }
+            }
+
+            /*for(DataSnapshot uidSnap : snapshot.getChildren())
+            {
+                for(DataSnapshot userInfoSnap : uidSnap.getChildren())
+                {
+                    if(userInfoSnap.getKey().equals("Application"))
+                    {
+                        for(DataSnapshot applicationSnap : userInfoSnap.getChildren())
+                        {
                             if(applicationSnap.getKey().equals("Warden Approval"))
                             {
                                 if(applicationSnap.getValue().toString().equals("false"))
@@ -215,6 +204,7 @@ public class WardenUserActivity extends AppCompatActivity {
                     }
                 }
             }
+             */
 
             wardenPendingApplicationsAdapter.notifyDataSetChanged();
             Toast.makeText(getApplicationContext(), "Data updated!", Toast.LENGTH_LONG).show();
@@ -258,12 +248,11 @@ public class WardenUserActivity extends AppCompatActivity {
         wardenPendingApplicationsRecyclerView.setAdapter(wardenPendingApplicationsAdapter);
 
         //code for the query
-        /*Query query = database.getReference("Users");
+        Query query = database.getReference("Users");
         query.orderByChild("Warden Approval").equalTo("false");
         query.addListenerForSingleValueEvent(valueEventListener);
-         */
 
-        database.getReference().child("Users").addListenerForSingleValueEvent(valueEventListener);
+        //database.getReference().child("Users").addListenerForSingleValueEvent(valueEventListener);
 
         //code for the toolbar
         actionBar = getSupportActionBar();
