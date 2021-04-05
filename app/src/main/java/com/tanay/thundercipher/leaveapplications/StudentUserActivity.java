@@ -291,6 +291,7 @@ public class StudentUserActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout)findViewById(R.id.studentDrawerLayout);
         navigationView = (NavigationView)findViewById(R.id.studentNavigationView);
 
+        //for navigation to settings and stuff
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
