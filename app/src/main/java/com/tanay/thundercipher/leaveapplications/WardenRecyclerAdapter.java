@@ -27,6 +27,7 @@ public class WardenRecyclerAdapter extends RecyclerView.Adapter<WardenRecyclerAd
     @Override
     public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+        //creating/inflating the view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.warden_list_layout, parent, false);
         ProfileViewHolder profileViewHolder = new ProfileViewHolder(view);
 
@@ -42,6 +43,7 @@ public class WardenRecyclerAdapter extends RecyclerView.Adapter<WardenRecyclerAd
         String mailIndex = mails[position];
         String phoneIndex = phones[position];
 
+        //setting the values of the recyclerView's components
         holder.profilePhotoImageView.setImageResource(imageIndex);
         holder.nameTextView.setText(nameIndex);
         holder.designationTextView.setText("(" + desigIndex + ")");
@@ -63,6 +65,7 @@ public class WardenRecyclerAdapter extends RecyclerView.Adapter<WardenRecyclerAd
         {
             super(itemView);
 
+            //linking the recyclerView's components to their variables
             profilePhotoImageView = itemView.findViewById(R.id.wardenListProfilePhotoImageView);
             nameTextView = itemView.findViewById(R.id.wardenListNameTextView);
             designationTextView = itemView.findViewById(R.id.wardenListDesignationTextView);

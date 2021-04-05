@@ -178,6 +178,8 @@ public class StudentProfileActivity extends AppCompatActivity {
         });
 
         StorageReference finalRef = mStorageRef.child("Users/" + userID + "/profile");
+
+        //if the profile pic already exists
         finalRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri)
